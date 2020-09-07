@@ -10,6 +10,6 @@ interface ApiService {
     @GET("games")
     fun getList(
         @Query("page") page: Int,
-        @Query("search")searchKey: String
+        @Query("search") searchKey: String
     ): Single<List<GamesResponse>>
 }

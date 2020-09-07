@@ -12,9 +12,9 @@ interface IGamesRepository {
 
     fun insertFavorite(favorite: Favorite)
 
-    fun getAllFavoriteGames() : Flowable<Resource<PagedList<GamesFavorite>>>
+    fun getAllFavoriteGames(): Flowable<Resource<PagedList<GamesFavorite>>>
 
-    fun isFavorite(gamesId: Int) : Flowable<Int>
+    fun isFavorite(gamesId: Int): Flowable<Int>
 
     fun deleteFavorite(gamesId: Int)
 }

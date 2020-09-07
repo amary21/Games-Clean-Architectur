@@ -3,7 +3,7 @@ package com.amary.codexgamer.core.domain.usecase
 import com.amary.codexgamer.core.domain.model.Favorite
 import com.amary.codexgamer.core.domain.repository.IGamesRepository
 
-class GamesInteractor(private val gamesRepository: IGamesRepository): GamesUseCase{
+class GamesInteractor(private val gamesRepository: IGamesRepository) : GamesUseCase {
 
     override fun getAllGames(searchKey: String) = gamesRepository.getAllGames(searchKey)
 

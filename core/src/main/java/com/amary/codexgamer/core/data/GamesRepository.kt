@@ -21,7 +21,7 @@ import io.reactivex.subjects.PublishSubject
 class GamesRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
-) : IGamesRepository{
+) : IGamesRepository {
 
     private val mCompositeDisposable = CompositeDisposable()
 
@@ -33,23 +33,24 @@ class GamesRepository(
             val dataSource = GamePageDataSourceFactory(remoteDataSource, localDataSource, searchKey)
                 .map { DataMapper.mapEntityToDomain(it) }
 
-            val dispose =RxPagedListBuilder(dataSource, GamePageDataSourceFactory.pagedListConfig())
-                .buildObservable().toFlowable(BackpressureStrategy.BUFFER)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .take(1)
-                .subscribe({
-                    result.onNext(Resource.Loading(null))
-                    if (it != null) {
-                        result.onNext(Resource.Success(it))
-                    } else {
-                        result.onNext(Resource.Error("Error", null))
-                    }
-                }, {
-                    result.onNext(Resource.Error(it.message.toString(), null))
-                })
+            val dispose =
+                RxPagedListBuilder(dataSource, GamePageDataSourceFactory.pagedListConfig())
+                    .buildObservable().toFlowable(BackpressureStrategy.BUFFER)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .take(1)
+                    .subscribe({
+                        result.onNext(Resource.Loading(null))
+                        if (it != null) {
+                            result.onNext(Resource.Success(it))
+                        } else {
+                            result.onNext(Resource.Error("Error", null))
+                        }
+                    }, {
+                        result.onNext(Resource.Error(it.message.toString(), null))
+                    })
             mCompositeDisposable.add(dispose)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             result.onNext(Resource.Error(e.message.toString(), null))
         }
         return result.toFlowable(BackpressureStrategy.BUFFER)
@@ -63,23 +64,24 @@ class GamesRepository(
             val dataSource = localDataSource.getAllFavoriteGames().map {
                 DataMapper.mapListFavoriteEntityToListFavoriteDomain(it)
             }
-            val dispose = RxPagedListBuilder(dataSource, GamePageDataSourceFactory.pagedListConfig())
-                .buildObservable().toFlowable(BackpressureStrategy.BUFFER)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .take(1)
-                .subscribe({
-                    result.first(Resource.Loading(null))
-                    if (it != null){
-                        result.onNext(Resource.Success(it))
-                    } else {
-                        result.onNext(Resource.Error("Error", null))
-                    }
-                },{
-                    result.onNext(Resource.Error(it.message.toString(), null))
-                })
+            val dispose =
+                RxPagedListBuilder(dataSource, GamePageDataSourceFactory.pagedListConfig())
+                    .buildObservable().toFlowable(BackpressureStrategy.BUFFER)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .take(1)
+                    .subscribe({
+                        result.first(Resource.Loading(null))
+                        if (it != null) {
+                            result.onNext(Resource.Success(it))
+                        } else {
+                            result.onNext(Resource.Error("Error", null))
+                        }
+                    }, {
+                        result.onNext(Resource.Error(it.message.toString(), null))
+                    })
             mCompositeDisposable.add(dispose)
-        } catch (e: Exception){
+        } catch (e: Exception) {
             result.onNext(Resource.Error(e.message.toString(), null))
         }
 
@@ -95,7 +97,7 @@ class GamesRepository(
     }
 
     @SuppressLint("CheckResult")
-    override fun isFavorite(gamesId: Int) : Flowable<Int> {
+    override fun isFavorite(gamesId: Int): Flowable<Int> {
         val result = PublishSubject.create<Int>()
         localDataSource.isFavorite(gamesId)
             .subscribeOn(Schedulers.io())
@@ -106,7 +108,7 @@ class GamesRepository(
         return result.toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    override fun deleteFavorite(gamesId: Int){
+    override fun deleteFavorite(gamesId: Int) {
         localDataSource.deleteFavorite(gamesId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

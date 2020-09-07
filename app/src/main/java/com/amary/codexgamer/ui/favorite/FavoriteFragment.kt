@@ -22,7 +22,11 @@ class FavoriteFragment : Fragment() {
     private val favoriteViewModel: FavoriteViewModel by viewModel()
     private lateinit var binding: FragmentFavoriteBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorite, container, false)
         initFavoriteGames(binding)
         return binding.root
@@ -30,27 +34,36 @@ class FavoriteFragment : Fragment() {
 
     private fun initFavoriteGames(binding: FragmentFavoriteBinding) {
         binding.apply {
-            favoriteViewModel.getAllFavoriteGames().observe(viewLifecycleOwner, Observer {pagedListFavorite ->
-                when(pagedListFavorite){
-                    is Resource.Loading -> {}
-                    is Resource.Success -> {
-                        rvFavorite.setUpPagingWithGrid(pagedListFavorite.data, R.layout.item_list, 2, {
-                            val imageLoader = Coil.imageLoader(context)
-                            val request = ImageRequest.Builder(context)
-                                .data(it.games.backgroundImage)
-                                .placeholder(com.amary.codexgamer.core.R.drawable.img_placeholder)
-                                .target(iv_item_image)
-                                .build()
-                            imageLoader.enqueue(request)
-                            tv_item_title.text = it.games.name
-                            tv_item_rating.text = it.games.rating.toString()
-                        }, adapterFavoriteGamesCallback,{
+            favoriteViewModel.getAllFavoriteGames()
+                .observe(viewLifecycleOwner, Observer { pagedListFavorite ->
+                    when (pagedListFavorite) {
+                        is Resource.Loading -> {
+                        }
+                        is Resource.Success -> {
+                            rvFavorite.setUpPagingWithGrid(
+                                pagedListFavorite.data,
+                                R.layout.item_list,
+                                2,
+                                {
+                                    val imageLoader = Coil.imageLoader(context)
+                                    val request = ImageRequest.Builder(context)
+                                        .data(it.games.backgroundImage)
+                                        .placeholder(com.amary.codexgamer.core.R.drawable.img_placeholder)
+                                        .target(iv_item_image)
+                                        .build()
+                                    imageLoader.enqueue(request)
+                                    tv_item_title.text = it.games.name
+                                    tv_item_rating.text = it.games.rating.toString()
+                                },
+                                adapterFavoriteGamesCallback,
+                                {
 
-                        })
+                                })
+                        }
+                        is Resource.Error -> {
+                        }
                     }
-                    is Resource.Error -> {}
-                }
-            })
+                })
         }
     }
 }

@@ -4,7 +4,7 @@ import com.amary.codexgamer.core.data.datasource.local.entity.FavoriteEntity
 import com.amary.codexgamer.core.data.datasource.local.entity.GamesEntity
 import com.amary.codexgamer.core.data.datasource.local.room.GamesDao
 
-class LocalDataSource (private val gamesDao: GamesDao) {
+class LocalDataSource(private val gamesDao: GamesDao) {
 
     fun getAllGames() = gamesDao.getAllGames()
 

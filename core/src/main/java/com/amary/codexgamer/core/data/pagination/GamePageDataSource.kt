@@ -14,25 +14,21 @@ class GamePageDataSource(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val search: String
-) : PageKeyedDataSource<Int, GamesEntity>(){
+) : PageKeyedDataSource<Int, GamesEntity>() {
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, GamesEntity>
     ) {
-        fetchData(1){
+        fetchData(1) {
             callback.onResult(it, null, 2)
         }
     }
 
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, GamesEntity>) {
-        fetchData(params.key){
-            callback.onResult(it, params.key - 1)
-        }
-    }
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, GamesEntity>) {}
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, GamesEntity>) {
-        fetchData(params.key){
+        fetchData(params.key) {
             callback.onResult(it, params.key + 1)
         }
     }
@@ -42,7 +38,7 @@ class GamePageDataSource(
         remoteDataSource.getAllGames(page, search)
             .map { DataMapper.mapResponsesToEntities(it) }
             .doOnSuccess {
-                if (it.isNotEmpty()){
+                if (it.isNotEmpty()) {
                     localDataSource.insertGames(it)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -53,13 +49,13 @@ class GamePageDataSource(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .ignoreElement()
-            .subscribe({},{error ->
+            .subscribe({}, { error ->
                 getJobErrorHandler(error)
             })
     }
 
     private fun getJobErrorHandler(error: Throwable) {
-        Log.e(TAG, error.message.toString() )
+        Log.e(TAG, error.message.toString())
     }
 
 

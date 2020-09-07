@@ -39,15 +39,19 @@ class DetailFragment : Fragment() {
     private fun initDetailGames(args: DetailFragmentArgs, binding: FragmentDetailBinding) {
         binding.apply {
             (activity as MainActivity).supportActionBar?.title = args.gamesData.name
-            rvScreenshot.setUpHorizontalListAdapter(args.gamesData.shortScreenshots, adapterScreenShotCallback, R.layout.item_screenshot, {
-                val imageLoader = Coil.imageLoader(context)
-                val request = ImageRequest.Builder(context)
-                    .data(it)
-                    .placeholder(com.amary.codexgamer.core.R.drawable.img_placeholder)
-                    .target(img_screenshot)
-                    .build()
-                imageLoader.enqueue(request)
-            })
+            rvScreenshot.setUpHorizontalListAdapter(
+                args.gamesData.shortScreenshots,
+                adapterScreenShotCallback,
+                R.layout.item_screenshot,
+                {
+                    val imageLoader = Coil.imageLoader(context)
+                    val request = ImageRequest.Builder(context)
+                        .data(it)
+                        .placeholder(com.amary.codexgamer.core.R.drawable.img_placeholder)
+                        .target(img_screenshot)
+                        .build()
+                    imageLoader.enqueue(request)
+                })
             detailGames = args.gamesData
 
             detailViewModel.isFavorite(args.gamesData.id).observe(viewLifecycleOwner, Observer {
@@ -69,9 +73,19 @@ class DetailFragment : Fragment() {
 
     private fun setStatusFavorite(statusFavorite: Boolean, fabFavorite: FloatingActionButton) {
         if (statusFavorite) {
-            fabFavorite.setImageDrawable(context?.let { ContextCompat.getDrawable(it, R.drawable.ic_menu_favorite) })
+            fabFavorite.setImageDrawable(context?.let {
+                ContextCompat.getDrawable(
+                    it,
+                    R.drawable.ic_menu_favorite
+                )
+            })
         } else {
-            fabFavorite.setImageDrawable(context?.let { ContextCompat.getDrawable(it, R.drawable.ic_menu_favorite_border) })
+            fabFavorite.setImageDrawable(context?.let {
+                ContextCompat.getDrawable(
+                    it,
+                    R.drawable.ic_menu_favorite_border
+                )
+            })
         }
 
     }
