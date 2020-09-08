@@ -1,5 +1,6 @@
 package com.amary.codexgamer.core.data.pagination
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PagedList
 import com.amary.codexgamer.core.data.datasource.local.LocalDataSource
@@ -12,6 +13,8 @@ class GamePageDataSourceFactory(
     private val search: String
 ) : DataSource.Factory<Int, GamesEntity>() {
 
+    val gameLivePageDataSource = MutableLiveData<GamePageDataSource>()
+
     companion object {
         private const val PAGE_SIZE = 20
         fun pagedListConfig() = PagedList.Config.Builder()
@@ -21,12 +24,14 @@ class GamePageDataSourceFactory(
             .build()
     }
 
-    override fun create(): DataSource<Int, GamesEntity> {
-        return GamePageDataSource(
+    override fun create(): DataSource<Int, GamesEntity?> {
+        val gamePageDataSource = GamePageDataSource(
             remoteDataSource = remoteDataSource,
             localDataSource = localDataSource,
             search = search
         )
+        gameLivePageDataSource.postValue(gamePageDataSource)
+        return gamePageDataSource
     }
 
 

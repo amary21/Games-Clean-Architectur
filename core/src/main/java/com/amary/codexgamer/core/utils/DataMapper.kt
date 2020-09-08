@@ -83,31 +83,39 @@ object DataMapper {
         )
     }
 
-    fun mapFavoriteDomainToFavoriteEnitity(favorite: Favorite) = FavoriteEntity(
+    fun mapFavoriteDomainToFavoriteEntity(favorite: Favorite) = FavoriteEntity(
         inputId = favorite.gamesId
     )
 
-    fun mapListFavoriteEntityToListFavoriteDomain(input: GamesWithFavorite): GamesFavorite {
-        val gamesEntity = input.gamesEntity
-        val games = Games(
-            id = gamesEntity.id,
-            name = gamesEntity.name,
-            released = gamesEntity.released,
-            backgroundImage = gamesEntity.backgroundImage,
-            rating = gamesEntity.rating,
-            clip = gamesEntity.clip,
-            minimumRequirement = gamesEntity.minimumRequirement,
-            recommendedRequirement = gamesEntity.recommendedRequirement,
-            genres = gamesEntity.genres,
-            platforms = gamesEntity.platforms,
-            stores = gamesEntity.stores,
-            shortScreenshots = gamesEntity.shortScreenshots
-        )
-        val favoriteEntity = input.favoriteEntity
-        val favorite = Favorite(
-            gamesId = favoriteEntity.gamesId
-        )
+    fun mapListFavoriteEntityToListFavoriteDomain(input: List<GamesWithFavorite>): List<GamesFavorite> {
+        val gamesFavoriteList = ArrayList<GamesFavorite>()
+        input.map {
+            val games = Games(
+                id = it.gamesEntity.id,
+                name = it.gamesEntity.name,
+                released = it.gamesEntity.released,
+                backgroundImage = it.gamesEntity.backgroundImage,
+                rating = it.gamesEntity.rating,
+                clip = it.gamesEntity.clip,
+                minimumRequirement = it.gamesEntity.minimumRequirement,
+                recommendedRequirement = it.gamesEntity.recommendedRequirement,
+                genres = it.gamesEntity.genres,
+                platforms = it.gamesEntity.platforms,
+                stores = it.gamesEntity.stores,
+                shortScreenshots = it.gamesEntity.shortScreenshots
+            )
+            val favorite = Favorite(
+                gamesId = it.favoriteEntity.gamesId
+            )
 
-        return GamesFavorite(games, favorite)
+            val gamesFavorite = GamesFavorite(
+                games = games,
+                favorite = favorite
+            )
+
+            gamesFavoriteList.add(gamesFavorite)
+        }
+
+        return gamesFavoriteList
     }
 }

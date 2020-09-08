@@ -2,7 +2,6 @@ package com.amary.codexgamer.core.di
 
 import androidx.room.Room
 import com.amary.codexgamer.core.BuildConfig.BASE_URL
-import com.amary.codexgamer.core.R
 import com.amary.codexgamer.core.data.GamesRepository
 import com.amary.codexgamer.core.data.datasource.local.LocalDataSource
 import com.amary.codexgamer.core.data.datasource.local.room.GamesDatabase
@@ -11,10 +10,6 @@ import com.amary.codexgamer.core.data.datasource.remote.network.ApiDeserializer
 import com.amary.codexgamer.core.data.datasource.remote.network.ApiService
 import com.amary.codexgamer.core.data.datasource.remote.response.GamesResponse
 import com.amary.codexgamer.core.domain.repository.IGamesRepository
-import com.amary.codexgamer.core.utils.AppExecutors
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import okhttp3.OkHttpClient

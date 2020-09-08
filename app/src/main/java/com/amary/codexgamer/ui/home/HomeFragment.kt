@@ -7,18 +7,17 @@ import android.view.*
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import coil.Coil
 import coil.request.ImageRequest
 import com.amary.codexgamer.R
-import com.amary.codexgamer.core.data.Resource
+import com.amary.codexgamer.core.data.ResourceState
 import com.amary.codexgamer.databinding.FragmentHomeBinding
 import com.amary.codexgamer.ui.MainActivity
 import com.amary.codexgamer.utils.GamesConstant.adapterGamesCallback
 import com.ian.recyclerviewhelper.helper.setUpPagingWithGrid
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_list.view.*
+import kotlinx.android.synthetic.main.view_no_data.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -67,44 +66,52 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.apply {
             ltLoading.visibility = View.VISIBLE
             homeViewModel.getGames(searchKey)
-                .observe(viewLifecycleOwner, Observer { pagegListGames ->
-                    if (pagegListGames != null) {
-                        when (pagegListGames) {
-                            is Resource.Loading -> {
-                                lt_loading.visibility = View.VISIBLE
-                            }
-                            is Resource.Success -> {
-                                rvHome.setUpPagingWithGrid(
-                                    pagegListGames.data,
-                                    R.layout.item_list,
-                                    2,
-                                    {
-                                        val imageLoader = Coil.imageLoader(context)
-                                        val request = ImageRequest.Builder(context)
-                                            .data(it.backgroundImage)
-                                            .placeholder(com.amary.codexgamer.core.R.drawable.img_placeholder)
-                                            .target(iv_item_image)
-                                            .build()
-                                        imageLoader.enqueue(request)
-                                        tv_item_title.text = it.name
-                                        tv_item_rating.text = it.rating.toString()
-                                    },
-                                    adapterGamesCallback,
-                                    {
-                                        this@apply.root.findNavController().navigate(
-                                            HomeFragmentDirections.actionNavHomeToNavDetail(this)
-                                        )
-                                    })
-
-                                ltLoading.visibility = View.GONE
-                            }
-                            is Resource.Error -> {
-                                ltLoading.visibility = View.GONE
-                                viewError.visibility = View.VISIBLE
-                            }
-                        }
+                .observe(viewLifecycleOwner, { pagedListGames ->
+                    if (pagedListGames != null){
+                        rvHome.setUpPagingWithGrid(
+                            pagedListGames,
+                            R.layout.item_list,
+                            2,
+                            {
+                                val imageLoader = Coil.imageLoader(context)
+                                val request = ImageRequest.Builder(context)
+                                    .data(it.backgroundImage)
+                                    .placeholder(com.amary.codexgamer.core.R.drawable.img_placeholder)
+                                    .target(iv_item_image)
+                                    .build()
+                                imageLoader.enqueue(request)
+                                tv_item_title.text = it.name
+                                tv_item_rating.text = it.rating.toString()
+                            },
+                            adapterGamesCallback,
+                            {
+                                this@apply.root.findNavController().navigate(
+                                    HomeFragmentDirections.actionNavHomeToNavDetail(this)
+                                )
+                            })
                     }
                 })
+
+            homeViewModel.getResourceState().observe(viewLifecycleOwner, {
+                when(it){
+                    ResourceState.LOADING -> {
+                        ltLoading.visibility = View.VISIBLE
+                        rvHome.visibility = View.VISIBLE
+                        viewError.visibility = View.GONE
+                    }
+                    ResourceState.LOADED -> {
+                        ltLoading.visibility = View.GONE
+                        rvHome.visibility = View.VISIBLE
+                        viewError.visibility = View.GONE
+                    }
+                    ResourceState.ERROR -> {
+                        ltLoading.visibility = View.GONE
+                        rvHome.visibility = View.GONE
+                        viewError.visibility = View.VISIBLE
+                        tv_no_data.text = it.message
+                    }
+                }
+            })
         }
     }
 }

@@ -23,7 +23,7 @@ interface GamesDao {
     fun insertFavorite(favoriteEntity: FavoriteEntity): Completable
 
     @Query("SELECT * FROM games , favorite WHERE games.gamesId = favorite.gamesId")
-    fun getAllFavoriteGames(): DataSource.Factory<Int, GamesWithFavorite>
+    fun getAllFavoriteGames(): Flowable<List<GamesWithFavorite>>
 
     @Query("SELECT EXISTS (SELECT * FROM favorite WHERE gamesId =:gamesId)")
     fun isFavorite(gamesId: Int): Flowable<Int>

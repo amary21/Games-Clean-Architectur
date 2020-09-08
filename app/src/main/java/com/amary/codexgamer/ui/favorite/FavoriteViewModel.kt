@@ -7,4 +7,5 @@ import com.amary.codexgamer.core.domain.usecase.GamesUseCase
 class FavoriteViewModel(private val gamesUseCase: GamesUseCase) : ViewModel() {
     fun getAllFavoriteGames() =
         LiveDataReactiveStreams.fromPublisher(gamesUseCase.getAllFavoriteGames())
+
 }

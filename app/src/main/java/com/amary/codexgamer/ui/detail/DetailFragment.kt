@@ -1,13 +1,16 @@
 package com.amary.codexgamer.ui.detail
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import coil.Coil
 import coil.request.ImageRequest
 import com.amary.codexgamer.R
@@ -36,6 +39,8 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
+    @Suppress("DEPRECATION")
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initDetailGames(args: DetailFragmentArgs, binding: FragmentDetailBinding) {
         binding.apply {
             (activity as MainActivity).supportActionBar?.title = args.gamesData.name
@@ -52,9 +57,26 @@ class DetailFragment : Fragment() {
                         .build()
                     imageLoader.enqueue(request)
                 })
-            detailGames = args.gamesData
 
-            detailViewModel.isFavorite(args.gamesData.id).observe(viewLifecycleOwner, Observer {
+            detailGames = args.gamesData
+            genreGames = args.gamesData.genres.joinToString(separator = ", ")
+            platformGames = args.gamesData.platforms.joinToString(separator = ", ")
+            storeGames = args.gamesData.stores.joinToString(separator = ", ")
+            tvMinimumRequirement.text =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) Html.fromHtml(
+                    args.gamesData.minimumRequirement,
+                    Html.FROM_HTML_MODE_COMPACT
+                ) else Html.fromHtml(args.gamesData.minimumRequirement)
+            tvRecomendedRequirement.text =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) Html.fromHtml(
+                    args.gamesData.recommendedRequirement,
+                    Html.FROM_HTML_MODE_COMPACT
+                ) else Html.fromHtml(args.gamesData.recommendedRequirement)
+            wbTrailer.settings.javaScriptEnabled = true
+            wbTrailer.webChromeClient = WebChromeClient()
+            wbTrailer.loadUrl(getString(R.string.youtube) + args.gamesData.clip)
+
+            detailViewModel.isFavorite(args.gamesData.id).observe(viewLifecycleOwner, {
                 var isFavorite = it == 1
                 setStatusFavorite(isFavorite, fabFavorite)
                 fabFavorite.setOnClickListener {
@@ -87,6 +109,5 @@ class DetailFragment : Fragment() {
                 )
             })
         }
-
     }
 }

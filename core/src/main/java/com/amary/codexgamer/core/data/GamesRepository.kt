@@ -1,10 +1,13 @@
 package com.amary.codexgamer.core.data
 
 import android.annotation.SuppressLint
+import android.arch.convert.toFlowable
+import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import com.amary.codexgamer.core.data.datasource.local.LocalDataSource
 import com.amary.codexgamer.core.data.datasource.remote.RemoteDataSource
+import com.amary.codexgamer.core.data.pagination.GamePageDataSource
 import com.amary.codexgamer.core.data.pagination.GamePageDataSourceFactory
 import com.amary.codexgamer.core.domain.model.Favorite
 import com.amary.codexgamer.core.domain.model.Games
@@ -14,7 +17,6 @@ import com.amary.codexgamer.core.utils.DataMapper
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
@@ -23,73 +25,36 @@ class GamesRepository(
     private val localDataSource: LocalDataSource
 ) : IGamesRepository {
 
-    private val mCompositeDisposable = CompositeDisposable()
+    private lateinit var gamePageDataSourceFactory: GamePageDataSourceFactory
 
     @SuppressLint("CheckResult")
-    override fun getAllGames(searchKey: String): Flowable<Resource<PagedList<Games>>> {
-        val result = PublishSubject.create<Resource<PagedList<Games>>>()
-        try {
-            result.first(Resource.Loading(null))
-            val dataSource = GamePageDataSourceFactory(remoteDataSource, localDataSource, searchKey)
-                .map { DataMapper.mapEntityToDomain(it) }
+    override fun getAllGames(searchKey: String): Flowable<PagedList<Games>> {
+        gamePageDataSourceFactory =
+            GamePageDataSourceFactory(remoteDataSource, localDataSource, searchKey)
+        val dataSource = gamePageDataSourceFactory.map { DataMapper.mapEntityToDomain(it) }
+        return RxPagedListBuilder(
+            dataSource,
+            GamePageDataSourceFactory.pagedListConfig()
+        ).buildObservable().toFlowable(BackpressureStrategy.BUFFER)
+    }
 
-            val dispose =
-                RxPagedListBuilder(dataSource, GamePageDataSourceFactory.pagedListConfig())
-                    .buildObservable().toFlowable(BackpressureStrategy.BUFFER)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .take(1)
-                    .subscribe({
-                        result.onNext(Resource.Loading(null))
-                        if (it != null) {
-                            result.onNext(Resource.Success(it))
-                        } else {
-                            result.onNext(Resource.Error("Error", null))
-                        }
-                    }, {
-                        result.onNext(Resource.Error(it.message.toString(), null))
-                    })
-            mCompositeDisposable.add(dispose)
-        } catch (e: Exception) {
-            result.onNext(Resource.Error(e.message.toString(), null))
-        }
-        return result.toFlowable(BackpressureStrategy.BUFFER)
+    override fun getResourceState(): Flowable<ResourceState> {
+        val transform = Transformations.switchMap(
+            gamePageDataSourceFactory.gameLivePageDataSource,
+            GamePageDataSource::resourceState
+        )
+        return transform.toFlowable()
     }
 
     @SuppressLint("CheckResult")
-    override fun getAllFavoriteGames(): Flowable<Resource<PagedList<GamesFavorite>>> {
-        val result = PublishSubject.create<Resource<PagedList<GamesFavorite>>>()
-        try {
-            result.first(Resource.Loading(null))
-            val dataSource = localDataSource.getAllFavoriteGames().map {
-                DataMapper.mapListFavoriteEntityToListFavoriteDomain(it)
-            }
-            val dispose =
-                RxPagedListBuilder(dataSource, GamePageDataSourceFactory.pagedListConfig())
-                    .buildObservable().toFlowable(BackpressureStrategy.BUFFER)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .take(1)
-                    .subscribe({
-                        result.first(Resource.Loading(null))
-                        if (it != null) {
-                            result.onNext(Resource.Success(it))
-                        } else {
-                            result.onNext(Resource.Error("Error", null))
-                        }
-                    }, {
-                        result.onNext(Resource.Error(it.message.toString(), null))
-                    })
-            mCompositeDisposable.add(dispose)
-        } catch (e: Exception) {
-            result.onNext(Resource.Error(e.message.toString(), null))
+    override fun getAllFavoriteGames(): Flowable<List<GamesFavorite>> {
+        return localDataSource.getAllFavoriteGames().map {
+            DataMapper.mapListFavoriteEntityToListFavoriteDomain(it)
         }
-
-        return result.toFlowable(BackpressureStrategy.BUFFER)
     }
 
     override fun insertFavorite(favorite: Favorite) {
-        val input = DataMapper.mapFavoriteDomainToFavoriteEnitity(favorite)
+        val input = DataMapper.mapFavoriteDomainToFavoriteEntity(favorite)
         localDataSource.insertFavorite(input)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

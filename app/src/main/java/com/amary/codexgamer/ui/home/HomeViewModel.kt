@@ -8,4 +8,5 @@ class HomeViewModel(private val gamesUseCase: GamesUseCase) : ViewModel() {
     fun getGames(searchKey: String) =
         LiveDataReactiveStreams.fromPublisher(gamesUseCase.getAllGames(searchKey))
 
+    fun getResourceState() = LiveDataReactiveStreams.fromPublisher(gamesUseCase.getResourceState())
 }
