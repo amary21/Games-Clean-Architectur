@@ -5,6 +5,7 @@ import com.amary.codexgamer.domain.usecase.GamesUseCase
 import com.amary.codexgamer.ui.detail.DetailViewModel
 import com.amary.codexgamer.ui.favorite.FavoriteViewModel
 import com.amary.codexgamer.ui.home.HomeViewModel
+import com.amary.codexgamer.utils.Preference
 import com.amary.codexgamer.ui.settings.SettingsViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -22,4 +23,10 @@ val viewModelModule = module {
     viewModel { FavoriteViewModel(get()) }
     viewModel { DetailViewModel(get()) }
     viewModel { SettingsViewModel(get()) }
+}
+
+val settingsModule = module {
+    factory {
+        Preference(get())
+    }
 }

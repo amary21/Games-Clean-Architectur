@@ -51,7 +51,7 @@ class DetailFragment : Fragment() {
                     val imageLoader = Coil.imageLoader(context)
                     val request = ImageRequest.Builder(context)
                         .data(it)
-                        .placeholder(com.amary.codexgamer.core.R.drawable.img_placeholder)
+                        .placeholder(R.drawable.img_placeholder)
                         .target(img_screenshot)
                         .build()
                     imageLoader.enqueue(request)
@@ -73,7 +73,7 @@ class DetailFragment : Fragment() {
                 ) else Html.fromHtml(args.gamesData.recommendedRequirement)
             wbTrailer.settings.javaScriptEnabled = true
             wbTrailer.webChromeClient = WebChromeClient()
-            wbTrailer.loadUrl(getString(R.string.youtube) + args.gamesData.clip)
+            wbTrailer.loadUrl(getString(R.string.youtube, args.gamesData.clip))
 
             detailViewModel.isFavorite(args.gamesData.id).observe(viewLifecycleOwner, {
                 var isFavorite = it == 1

@@ -47,7 +47,7 @@ class FavoriteFragment : Fragment() {
                                 val imageLoader = Coil.imageLoader(context)
                                 val request = ImageRequest.Builder(context)
                                     .data(it.games.backgroundImage)
-                                    .placeholder(com.amary.codexgamer.core.R.drawable.img_placeholder)
+                                    .placeholder(R.drawable.img_placeholder)
                                     .target(iv_item_image)
                                     .build()
                                 imageLoader.enqueue(request)

@@ -4,6 +4,7 @@ import android.app.Application
 import com.amary.codexgamer.core.di.databaseModule
 import com.amary.codexgamer.core.di.networkModule
 import com.amary.codexgamer.core.di.repositoryModule
+import com.amary.codexgamer.di.settingsModule
 import com.amary.codexgamer.di.useCaseModule
 import com.amary.codexgamer.di.viewModelModule
 import com.facebook.stetho.Stetho
@@ -25,7 +26,8 @@ class App : Application() {
                     networkModule,
                     repositoryModule,
                     useCaseModule,
-                    viewModelModule
+                    viewModelModule,
+                    settingsModule
                 )
             )
         }

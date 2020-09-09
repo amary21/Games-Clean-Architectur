@@ -1,5 +1,3 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.amary.codexgamer.domain">
+<manifest package="com.amary.codexgamer.domain">
 
-    /
 </manifest>
