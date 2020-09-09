@@ -9,7 +9,7 @@ import com.amary.codexgamer.core.data.datasource.remote.RemoteDataSource
 import com.amary.codexgamer.core.data.datasource.remote.network.ApiDeserializer
 import com.amary.codexgamer.core.data.datasource.remote.network.ApiService
 import com.amary.codexgamer.core.data.datasource.remote.response.GamesResponse
-import com.amary.codexgamer.core.domain.repository.IGamesRepository
+import com.amary.codexgamer.domain.repository.IGamesRepository
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import okhttp3.OkHttpClient

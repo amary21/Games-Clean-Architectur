@@ -38,6 +38,6 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="gamesData"
-            app:argType="com.amary.codexgamer.core.domain.model.Games" />
+            app:argType="com.amary.codexgamer.domain.model.Games" />
     </fragment>
 </navigation>

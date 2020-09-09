@@ -20,7 +20,7 @@ buildscript {
     ext.recyclerviewhelper_version = "0.0.5-alpha04c"
     ext.material_version = "1.2.0"
     ext.glide_version = "4.11.0"
-    ext.lottie_version = "3.4.0"
+    ext.lottie_version = '3.4.2'
     ext.coil_version = "0.13.0"
 
     ext.room_version = "2.2.5"
@@ -34,6 +34,7 @@ buildscript {
 
     ext.rxjava_version = "2.2.19"
     ext.rxandroid_version = "2.1.1"
+    ext.livedatatorx_version = "v1.1"
 
     ext.steho_version = "1.5.1"
 

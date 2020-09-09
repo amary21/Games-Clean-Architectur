@@ -29,7 +29,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    //noinspection GradleDependency
+    implementation project(path: ':domain')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation "androidx.room:room-runtime:$room_version"
@@ -50,6 +50,6 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "androidx.room:room-rxjava2:$room_version"
 
-    implementation 'com.github.YvesCheung:LiveDataToRxJava:v1.1'
+    implementation "com.github.YvesCheung:LiveDataToRxJava:$livedatatorx_version"
 
 }

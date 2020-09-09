@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
-import com.amary.codexgamer.core.data.ResourceState
 import com.amary.codexgamer.core.data.datasource.local.LocalDataSource
 import com.amary.codexgamer.core.data.datasource.local.entity.GamesEntity
 import com.amary.codexgamer.core.data.datasource.remote.RemoteDataSource
 import com.amary.codexgamer.core.utils.DataMapper
+import com.amary.codexgamer.domain.model.ResourceState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -18,7 +18,7 @@ class GamePageDataSource(
     private val search: String
 ) : PageKeyedDataSource<Int, GamesEntity?>() {
 
-    val resourceState : MutableLiveData<ResourceState> = MutableLiveData()
+    val resourceState: MutableLiveData<ResourceState> = MutableLiveData()
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,

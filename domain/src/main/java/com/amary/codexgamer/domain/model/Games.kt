@@ -1,4 +1,4 @@
-package com.amary.codexgamer.core.domain.model
+package com.amary.codexgamer.domain.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

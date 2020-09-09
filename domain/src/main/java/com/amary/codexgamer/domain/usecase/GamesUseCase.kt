@@ -1,13 +1,13 @@
-package com.amary.codexgamer.core.domain.repository
+package com.amary.codexgamer.domain.usecase
 
 import androidx.paging.PagedList
-import com.amary.codexgamer.core.data.ResourceState
-import com.amary.codexgamer.core.domain.model.Favorite
-import com.amary.codexgamer.core.domain.model.Games
-import com.amary.codexgamer.core.domain.model.GamesFavorite
+import com.amary.codexgamer.domain.model.Favorite
+import com.amary.codexgamer.domain.model.Games
+import com.amary.codexgamer.domain.model.GamesFavorite
+import com.amary.codexgamer.domain.model.ResourceState
 import io.reactivex.Flowable
 
-interface IGamesRepository {
+interface GamesUseCase {
     fun getAllGames(searchKey: String): Flowable<PagedList<Games>>
 
     fun getResourceState(): Flowable<ResourceState>

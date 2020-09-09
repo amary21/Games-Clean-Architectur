@@ -2,8 +2,8 @@ package com.amary.codexgamer.ui.detail
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
-import com.amary.codexgamer.core.domain.model.Favorite
-import com.amary.codexgamer.core.domain.usecase.GamesUseCase
+import com.amary.codexgamer.domain.model.Favorite
+import com.amary.codexgamer.domain.usecase.GamesUseCase
 
 class DetailViewModel(private val gamesUseCase: GamesUseCase) : ViewModel() {
 

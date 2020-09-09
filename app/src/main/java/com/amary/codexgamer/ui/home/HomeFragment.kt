@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import coil.Coil
 import coil.request.ImageRequest
 import com.amary.codexgamer.R
-import com.amary.codexgamer.core.data.ResourceState
+import com.amary.codexgamer.domain.model.ResourceState
 import com.amary.codexgamer.databinding.FragmentHomeBinding
 import com.amary.codexgamer.ui.MainActivity
 import com.amary.codexgamer.utils.GamesConstant.adapterGamesCallback

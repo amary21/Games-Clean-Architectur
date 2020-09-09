@@ -56,7 +56,7 @@ class FavoriteFragment : Fragment() {
                             },
                             {
                                 this@apply.root.findNavController().navigate(
-                                    FavoriteFragmentDirections.actionNavFavoriteToNavDetail(this.games)
+                                    FavoriteFragmentDirections.actionNavFavoriteToNavDetail( this.games)
                                 )
                             })
                     } else {

@@ -1,7 +1,7 @@
 package com.amary.codexgamer.di
 
-import com.amary.codexgamer.core.domain.usecase.GamesInteractor
-import com.amary.codexgamer.core.domain.usecase.GamesUseCase
+import com.amary.codexgamer.domain.usecase.GamesInteractor
+import com.amary.codexgamer.domain.usecase.GamesUseCase
 import com.amary.codexgamer.ui.detail.DetailViewModel
 import com.amary.codexgamer.ui.favorite.FavoriteViewModel
 import com.amary.codexgamer.ui.home.HomeViewModel
@@ -10,7 +10,11 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory<GamesUseCase> { GamesInteractor(get()) }
+    factory<GamesUseCase> {
+        GamesInteractor(
+            get()
+        )
+    }
 }
 
 val viewModelModule = module {

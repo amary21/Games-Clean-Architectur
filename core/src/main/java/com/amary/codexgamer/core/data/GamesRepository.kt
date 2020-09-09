@@ -9,11 +9,8 @@ import com.amary.codexgamer.core.data.datasource.local.LocalDataSource
 import com.amary.codexgamer.core.data.datasource.remote.RemoteDataSource
 import com.amary.codexgamer.core.data.pagination.GamePageDataSource
 import com.amary.codexgamer.core.data.pagination.GamePageDataSourceFactory
-import com.amary.codexgamer.core.domain.model.Favorite
-import com.amary.codexgamer.core.domain.model.Games
-import com.amary.codexgamer.core.domain.model.GamesFavorite
-import com.amary.codexgamer.core.domain.repository.IGamesRepository
 import com.amary.codexgamer.core.utils.DataMapper
+import com.amary.codexgamer.domain.repository.IGamesRepository
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,7 +25,7 @@ class GamesRepository(
     private lateinit var gamePageDataSourceFactory: GamePageDataSourceFactory
 
     @SuppressLint("CheckResult")
-    override fun getAllGames(searchKey: String): Flowable<PagedList<Games>> {
+    override fun getAllGames(searchKey: String): Flowable<PagedList<com.amary.codexgamer.domain.model.Games>> {
         gamePageDataSourceFactory =
             GamePageDataSourceFactory(remoteDataSource, localDataSource, searchKey)
         val dataSource = gamePageDataSourceFactory.map { DataMapper.mapEntityToDomain(it) }
@@ -38,7 +35,7 @@ class GamesRepository(
         ).buildObservable().toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    override fun getResourceState(): Flowable<ResourceState> {
+    override fun getResourceState(): Flowable<com.amary.codexgamer.domain.model.ResourceState> {
         val transform = Transformations.switchMap(
             gamePageDataSourceFactory.gameLivePageDataSource,
             GamePageDataSource::resourceState
@@ -47,13 +44,13 @@ class GamesRepository(
     }
 
     @SuppressLint("CheckResult")
-    override fun getAllFavoriteGames(): Flowable<List<GamesFavorite>> {
+    override fun getAllFavoriteGames(): Flowable<List<com.amary.codexgamer.domain.model.GamesFavorite>> {
         return localDataSource.getAllFavoriteGames().map {
             DataMapper.mapListFavoriteEntityToListFavoriteDomain(it)
         }
     }
 
-    override fun insertFavorite(favorite: Favorite) {
+    override fun insertFavorite(favorite: com.amary.codexgamer.domain.model.Favorite) {
         val input = DataMapper.mapFavoriteDomainToFavoriteEntity(favorite)
         localDataSource.insertFavorite(input)
             .subscribeOn(Schedulers.io())

@@ -9,7 +9,7 @@
 
         <variable
             name="detailGames"
-            type="com.amary.codexgamer.core.domain.model.Games" />
+            type="com.amary.codexgamer.domain.model.Games" />
 
         <variable
             name="genreGames"

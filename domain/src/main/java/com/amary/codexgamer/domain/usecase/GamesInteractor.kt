@@ -1,9 +1,7 @@
-package com.amary.codexgamer.core.domain.usecase
+package com.amary.codexgamer.domain.usecase
 
-import com.amary.codexgamer.core.data.ResourceState
-import com.amary.codexgamer.core.domain.model.Favorite
-import com.amary.codexgamer.core.domain.repository.IGamesRepository
-import io.reactivex.Flowable
+import com.amary.codexgamer.domain.model.Favorite
+import com.amary.codexgamer.domain.repository.IGamesRepository
 
 class GamesInteractor(private val gamesRepository: IGamesRepository) : GamesUseCase {
 

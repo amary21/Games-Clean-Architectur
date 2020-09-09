@@ -1,8 +1,8 @@
 package com.amary.codexgamer.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.amary.codexgamer.core.domain.model.Games
-import com.amary.codexgamer.core.domain.model.GamesFavorite
+import com.amary.codexgamer.domain.model.Games
+import com.amary.codexgamer.domain.model.GamesFavorite
 
 object GamesConstant {
     val adapterGamesCallback = object : DiffUtil.ItemCallback<Games>() {
@@ -15,7 +15,7 @@ object GamesConstant {
         override fun areContentsTheSame(oldItem: String, newItem: String) = oldItem == newItem
     }
 
-    val adapterFavoriteGamesCallback = object : DiffUtil.ItemCallback<GamesFavorite>() {
+    val adapterFavoriteGamesCallback: DiffUtil.ItemCallback<GamesFavorite> = object : DiffUtil.ItemCallback<GamesFavorite>() {
         override fun areItemsTheSame(oldItem: GamesFavorite, newItem: GamesFavorite) =
             oldItem.favorite == newItem.favorite
 

@@ -2,7 +2,7 @@ package com.amary.codexgamer.ui.home
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
-import com.amary.codexgamer.core.domain.usecase.GamesUseCase
+import com.amary.codexgamer.domain.usecase.GamesUseCase
 
 class HomeViewModel(private val gamesUseCase: GamesUseCase) : ViewModel() {
     fun getGames(searchKey: String) =
