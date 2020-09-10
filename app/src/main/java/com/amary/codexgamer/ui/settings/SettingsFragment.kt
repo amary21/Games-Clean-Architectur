@@ -1,21 +1,25 @@
 package com.amary.codexgamer.ui.settings
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import android.widget.RadioButton
+import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.amary.codexgamer.R
 import com.amary.codexgamer.utils.Preference
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment(), CompoundButton.OnCheckedChangeListener,
+    RadioGroup.OnCheckedChangeListener {
 
-//    private val settingsViewModel: SettingsViewModel by viewModel()
+    private val settingsViewModel: SettingsViewModel by viewModel()
     private val preference: Preference by inject()
 
     override fun onCreateView(
@@ -29,28 +33,15 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getSettingLanguage()
-        setSettingLanguage()
+        rb_set_language.setOnCheckedChangeListener(this)
+
+        getSettingDarkMode()
+        sw_dark_mode.setOnCheckedChangeListener(this)
     }
 
-    @SuppressLint("UseRequireInsteadOfGet")
-    private fun setSettingLanguage() {
-        rb_set_language.setOnCheckedChangeListener { group, checkedId ->
-            val rb = group.findViewById<RadioButton>(checkedId)
-            if (rb != null) {
-                when (checkedId) {
-                    R.id.rb_en -> {
-                        rb.isChecked = true
-                        preference.setDataLanguage("en")
-                        alertChangeLanguage()
-                    }
-                    R.id.rb_id -> {
-                        rb.isChecked = true
-                        preference.setDataLanguage("in")
-                        alertChangeLanguage()
-                    }
-                }
-            }
-        }
+    private fun getSettingDarkMode() {
+        val darkPreference = preference.getDataDarkMode()
+        sw_dark_mode.isChecked = darkPreference == 2
     }
 
     private fun getSettingLanguage() {
@@ -75,5 +66,36 @@ class SettingsFragment : Fragment() {
 
         builder.setNegativeButton(getString(R.string.restart_later)) { _, _ -> }
         builder.create().show()
+    }
+
+    override fun onCheckedChanged(cButton: CompoundButton, isChecked: Boolean) {
+        if(cButton.id == R.id.sw_dark_mode){
+            val nightMode: Int = if (isChecked){
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
+
+            AppCompatDelegate.setDefaultNightMode(nightMode)
+            preference.setDataDarkMode(nightMode)
+        }
+    }
+
+    override fun onCheckedChanged(group: RadioGroup, id: Int) {
+        val rb = group.findViewById<RadioButton>(id)
+        if (rb != null) {
+            when (id) {
+                R.id.rb_en -> {
+                    rb.isChecked = true
+                    preference.setDataLanguage("en")
+                    alertChangeLanguage()
+                }
+                R.id.rb_id -> {
+                    rb.isChecked = true
+                    preference.setDataLanguage("in")
+                    alertChangeLanguage()
+                }
+            }
+        }
     }
 }

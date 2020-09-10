@@ -21,7 +21,9 @@ class Preference(context: Context) {
     fun setDataLanguage(value: String) = editor.putString(LANGUAGE, value).commit()
     fun getDataLanguage() = pref.getString(LANGUAGE, "")
 
-    fun setDataDarkMode(value: Boolean) = editor.putBoolean(DARK_MODE, value).commit()
-    fun getDataDarkMode(key: String) = pref.getBoolean(key, false)
+    fun setDataDarkMode(value: Int) = editor.putInt(DARK_MODE, value).commit()
+    fun getDataDarkMode(): Int? {
+        return pref.getInt(DARK_MODE, 0)
+    }
 
 }

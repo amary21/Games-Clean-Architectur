@@ -2,7 +2,9 @@ package com.amary.codexgamer.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getLocalization()
+        getDarkModeOn()
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -57,5 +60,11 @@ class MainActivity : AppCompatActivity() {
         val configuration = Configuration()
         configuration.locale = locale
         baseContext.resources.updateConfiguration(configuration, baseContext.resources.displayMetrics)
+    }
+
+    private fun getDarkModeOn() {
+        val darkPreference = preference.getDataDarkMode()
+        val dark = darkPreference ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        AppCompatDelegate.setDefaultNightMode(dark)
     }
 }

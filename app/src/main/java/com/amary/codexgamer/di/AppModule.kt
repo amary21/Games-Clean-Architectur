@@ -25,7 +25,7 @@ val viewModelModule = module {
     viewModel { SettingsViewModel(get()) }
 }
 
-val settingsModule = module {
+val preferenceModule = module {
     factory {
         Preference(get())
     }
