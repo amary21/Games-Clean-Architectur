@@ -20,14 +20,16 @@
     <fragment
         android:id="@+id/nav_favorite"
         android:name="com.amary.codexgamer.favorite.FavoriteFragment"
-        android:label="@string/menu_favorite">
+        android:label="@string/menu_favorite"
+        app:moduleName="favorite">
     </fragment>
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.amary.codexgamer.ui.settings.SettingsFragment"
+        android:name="com.amary.codexgamer.settings.SettingsFragment"
         android:label="@string/menu_settings"
-        tools:layout="@layout/fragment_settings" />
+        app:moduleName="settings"/>
+
     <fragment
         android:id="@+id/nav_detail"
         android:name="com.amary.codexgamer.ui.detail.DetailFragment"

@@ -1,3 +1,4 @@
+include ':settings'
 include ':favorite'
 include ':domain'
 include ':core'

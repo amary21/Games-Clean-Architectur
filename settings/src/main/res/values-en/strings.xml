@@ -30,6 +30,4 @@
     <string name="alert_language_change">Language has changed, Please restart your application</string>
     <string name="restart_now">Restart Now</string>
     <string name="restart_later">Later</string>
-    <string name="title_favorite">favorite</string>
-    <string name="title_settings">settings</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.amary.codexgamer.ui.settings
+package com.amary.codexgamer.settings
 
 import androidx.lifecycle.ViewModel
 import com.amary.codexgamer.domain.usecase.GamesUseCase

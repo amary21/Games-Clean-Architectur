@@ -85,9 +85,9 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                             },
                             adapterGamesCallback,
                             {
-                                this@apply.root.findNavController().navigate(
-                                    HomeFragmentDirections.actionNavHomeToNavDetail(this)
-                                )
+//                                this@apply.root.findNavController().navigate(
+//                                    HomeFragmentDirections.actionNavHomeToNavDetail(this)
+//                                )
                             })
                     }
                 })

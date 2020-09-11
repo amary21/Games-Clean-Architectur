@@ -1,4 +1,4 @@
-package com.amary.codexgamer.ui.settings
+package com.amary.codexgamer.settings
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -10,11 +10,11 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import com.amary.codexgamer.R
 import com.amary.codexgamer.utils.Preference
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 class SettingsFragment : Fragment(), CompoundButton.OnCheckedChangeListener,
     RadioGroup.OnCheckedChangeListener {
@@ -32,6 +32,7 @@ class SettingsFragment : Fragment(), CompoundButton.OnCheckedChangeListener,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadKoinModules(settingsModule)
         getSettingLanguage()
         rb_set_language.setOnCheckedChangeListener(this)
 
