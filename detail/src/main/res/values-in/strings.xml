@@ -30,8 +30,4 @@
     <string name="alert_language_change">Bahasa telah berubah, Silakan mulai ulang aplikasi anda</string>
     <string name="restart_now">Muat Ulang Sekarang</string>
     <string name="restart_later">Nanti</string>
-    <string name="title_favorite">favorite</string>
-    <string name="title_settings">settings</string>
-    <string name="title_home">home</string>
-    <string name="title_detail">detail</string>
 </resources>

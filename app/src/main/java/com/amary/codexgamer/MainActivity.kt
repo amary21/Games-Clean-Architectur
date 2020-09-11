@@ -1,8 +1,7 @@
-package com.amary.codexgamer.ui
+package com.amary.codexgamer
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -12,7 +11,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.amary.codexgamer.R
 import com.amary.codexgamer.utils.Preference
 import com.google.android.material.navigation.NavigationView
 import org.koin.android.ext.android.inject

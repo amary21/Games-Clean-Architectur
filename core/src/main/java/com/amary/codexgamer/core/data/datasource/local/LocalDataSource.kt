@@ -6,7 +6,7 @@ import com.amary.codexgamer.core.data.datasource.local.room.GamesDao
 
 class LocalDataSource(private val gamesDao: GamesDao) {
 
-    fun getAllGames() = gamesDao.getAllGames()
+    fun getDetailGames(gamesId: Int) = gamesDao.getDetailGames(gamesId)
 
     fun insertGames(gamesEntity: List<GamesEntity>) = gamesDao.insertGames(gamesEntity)
 

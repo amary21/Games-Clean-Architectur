@@ -1,6 +1,5 @@
 package com.amary.codexgamer.core.data.datasource.local.room
 
-import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,8 +12,9 @@ import io.reactivex.Flowable
 
 @Dao
 interface GamesDao {
-    @Query("SELECT * FROM games")
-    fun getAllGames(): DataSource.Factory<Int, GamesEntity>
+
+    @Query("SELECT * FROM games WHERE gamesid=:gamesId")
+    fun getDetailGames(gamesId: Int): Flowable<GamesEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGames(gamesEntity: List<GamesEntity>): Completable

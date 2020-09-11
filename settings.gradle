@@ -1,3 +1,4 @@
+include ':detail'
 include ':home'
 include ':settings'
 include ':favorite'

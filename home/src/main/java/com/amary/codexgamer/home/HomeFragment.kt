@@ -2,6 +2,8 @@ package com.amary.codexgamer.home
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
@@ -11,7 +13,7 @@ import coil.Coil
 import coil.request.ImageRequest
 import com.amary.codexgamer.domain.model.ResourceState
 import com.amary.codexgamer.home.databinding.FragmentHomeBinding
-import com.amary.codexgamer.ui.MainActivity
+import com.amary.codexgamer.MainActivity
 import com.amary.codexgamer.utils.GamesConstant.adapterGamesCallback
 import com.ian.recyclerviewhelper.helper.setUpPagingWithGrid
 import kotlinx.android.synthetic.main.item_list.view.*
@@ -85,9 +87,8 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                             },
                             adapterGamesCallback,
                             {
-//                                this@apply.root.findNavController().navigate(
-//                                    HomeFragmentDirections.actionNavHomeToNavDetail(this)
-//                                )
+                                val uri = Uri.parse("codexgamer://detail?gamesId=${this.id}")
+                                startActivity(Intent(Intent.ACTION_VIEW, uri))
                             })
                     }
                 })

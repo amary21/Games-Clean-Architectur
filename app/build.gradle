@@ -38,7 +38,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    dynamicFeatures = [':favorite', ':settings', ':home']
+    dynamicFeatures = [':favorite', ':settings', ':home', ':detail']
 
 }
 

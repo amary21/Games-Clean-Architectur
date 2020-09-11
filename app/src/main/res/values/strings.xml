@@ -33,4 +33,5 @@
     <string name="title_favorite">favorite</string>
     <string name="title_settings">settings</string>
     <string name="title_home">home</string>
+    <string name="title_detail">detail</string>
 </resources>

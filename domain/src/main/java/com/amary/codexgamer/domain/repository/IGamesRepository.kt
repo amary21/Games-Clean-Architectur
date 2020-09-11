@@ -10,6 +10,8 @@ import io.reactivex.Flowable
 interface IGamesRepository {
     fun getAllGames(searchKey: String): Flowable<PagedList<Games>>
 
+    fun getDetailGames(gamesId: Int): Flowable<Games>
+
     fun getResourceState(): Flowable<ResourceState>
 
     fun insertFavorite(favorite: Favorite)

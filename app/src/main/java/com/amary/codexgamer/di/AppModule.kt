@@ -2,9 +2,7 @@ package com.amary.codexgamer.di
 
 import com.amary.codexgamer.domain.usecase.GamesInteractor
 import com.amary.codexgamer.domain.usecase.GamesUseCase
-import com.amary.codexgamer.ui.detail.DetailViewModel
 import com.amary.codexgamer.utils.Preference
-import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val useCaseModule = module {
@@ -13,10 +11,6 @@ val useCaseModule = module {
             get()
         )
     }
-}
-
-val viewModelModule = module {
-    viewModel { DetailViewModel(get()) }
 }
 
 val preferenceModule = module {

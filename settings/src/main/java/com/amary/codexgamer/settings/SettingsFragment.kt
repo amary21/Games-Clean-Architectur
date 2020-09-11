@@ -13,13 +13,10 @@ import androidx.fragment.app.Fragment
 import com.amary.codexgamer.utils.Preference
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.context.loadKoinModules
 
 class SettingsFragment : Fragment(), CompoundButton.OnCheckedChangeListener,
     RadioGroup.OnCheckedChangeListener {
 
-    private val settingsViewModel: SettingsViewModel by viewModel()
     private val preference: Preference by inject()
 
     override fun onCreateView(
@@ -32,7 +29,6 @@ class SettingsFragment : Fragment(), CompoundButton.OnCheckedChangeListener,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadKoinModules(settingsModule)
         getSettingLanguage()
         rb_set_language.setOnCheckedChangeListener(this)
 
@@ -70,8 +66,8 @@ class SettingsFragment : Fragment(), CompoundButton.OnCheckedChangeListener,
     }
 
     override fun onCheckedChanged(cButton: CompoundButton, isChecked: Boolean) {
-        if(cButton.id == R.id.sw_dark_mode){
-            val nightMode: Int = if (isChecked){
+        if (cButton.id == R.id.sw_dark_mode) {
+            val nightMode: Int = if (isChecked) {
                 AppCompatDelegate.MODE_NIGHT_YES
             } else {
                 AppCompatDelegate.MODE_NIGHT_NO

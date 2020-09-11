@@ -1,4 +1,4 @@
-package com.amary.codexgamer.ui.detail
+package com.amary.codexgamer.detail
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
@@ -6,6 +6,8 @@ import com.amary.codexgamer.domain.model.Favorite
 import com.amary.codexgamer.domain.usecase.GamesUseCase
 
 class DetailViewModel(private val gamesUseCase: GamesUseCase) : ViewModel() {
+
+    fun getDetailGames(gamesInt: Int) = LiveDataReactiveStreams.fromPublisher(gamesUseCase.getDetailGames(gamesInt))
 
     fun insertFavorite(favorite: Favorite) = gamesUseCase.insertFavorite(favorite)
 

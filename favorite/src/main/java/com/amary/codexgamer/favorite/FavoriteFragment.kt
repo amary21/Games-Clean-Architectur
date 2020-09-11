@@ -1,5 +1,7 @@
 package com.amary.codexgamer.favorite
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -53,7 +55,8 @@ class FavoriteFragment : Fragment() {
                                 tv_item_title_favorite.text = it.games.name
                                 tv_item_rating_favorite.text = it.games.rating.toString()
                             },{
-                                //TODO TOMBOL KE DETAIL
+                                val uri = Uri.parse("codexgamer://detail?gamesId=${this.games.id}")
+                                startActivity(Intent(Intent.ACTION_VIEW, uri))
                             })
                     } else {
                         ltLoadingFavorite.visibility = View.GONE

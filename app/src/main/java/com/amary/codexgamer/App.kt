@@ -6,7 +6,6 @@ import com.amary.codexgamer.core.di.networkModule
 import com.amary.codexgamer.core.di.repositoryModule
 import com.amary.codexgamer.di.preferenceModule
 import com.amary.codexgamer.di.useCaseModule
-import com.amary.codexgamer.di.viewModelModule
 import com.facebook.stetho.Stetho
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -26,7 +25,6 @@ class App : Application() {
                     networkModule,
                     repositoryModule,
                     useCaseModule,
-                    viewModelModule,
                     preferenceModule
                 )
             )
