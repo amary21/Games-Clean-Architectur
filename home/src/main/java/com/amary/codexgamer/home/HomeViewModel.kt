@@ -1,4 +1,4 @@
-package com.amary.codexgamer.ui.home
+package com.amary.codexgamer.home
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel

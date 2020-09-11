@@ -1,4 +1,4 @@
-package com.amary.codexgamer.ui.home
+package com.amary.codexgamer.home
 
 import android.app.SearchManager
 import android.content.Context
@@ -7,18 +7,17 @@ import android.view.*
 import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import coil.Coil
 import coil.request.ImageRequest
-import com.amary.codexgamer.R
 import com.amary.codexgamer.domain.model.ResourceState
-import com.amary.codexgamer.databinding.FragmentHomeBinding
+import com.amary.codexgamer.home.databinding.FragmentHomeBinding
 import com.amary.codexgamer.ui.MainActivity
 import com.amary.codexgamer.utils.GamesConstant.adapterGamesCallback
 import com.ian.recyclerviewhelper.helper.setUpPagingWithGrid
 import kotlinx.android.synthetic.main.item_list.view.*
 import kotlinx.android.synthetic.main.view_no_data.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 
 class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -31,6 +30,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        loadKoinModules(homeModule)
         setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         initListGames(binding)
