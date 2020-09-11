@@ -1,4 +1,4 @@
-package com.amary.codexgamer.ui.favorite
+package com.amary.codexgamer.favorite
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
