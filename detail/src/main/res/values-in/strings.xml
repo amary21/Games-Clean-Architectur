@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Codex Gamer</string>
+    <string name="action_search">Cari</string>
+    <string name="menu_home">Beranda</string>
+    <string name="menu_favorite">Favorit</string>
+    <string name="menu_settings">Pengaturan</string>
+    <string name="image_description">Gambar</string>
+    <string name="text_primary">Sample of title text</string>
+    <string name="text_subtitle">Contoh teks judul</string>
+    <string name="ov_genre">"Aliran: "</string>
+    <string name="ov_release_date">"Tanggal Rilis: "</string>
+    <string name="ov_rating">"Peringkat: "</string>
+    <string name="ov_platform">Platform: </string>
+    <string name="ov_store">"Toko: "</string>
+    <string name="overview">Gambaran</string>
+    <string name="system_requirements">Persyaratan Sistem (PC)</string>
+    <string name="sys_minimum_requirements">Persyaratan Minimum</string>
+    <string name="sys_recommended_requirements">Persyaratan yang Direkomendasikan</string>
+    <string name="youtube">https://www.youtube.com/embed/%1$s</string>
+</resources>

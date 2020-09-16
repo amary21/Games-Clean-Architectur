@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Codex Gamer</string>
+    <string name="localization">en-US</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="menu_settings">Settings</string>
+    <string name="image_description">Image</string>
+    <string name="txt_setting_language">Setting Language</string>
+    <string name="language_en">English</string>
+    <string name="language_id">Indonesia</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="alert_language_change">Language has changed, Please restart your application</string>
+    <string name="restart_now">Restart Now</string>
+    <string name="restart_later">Later</string>
+</resources>

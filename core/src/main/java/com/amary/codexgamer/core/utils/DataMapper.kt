@@ -4,9 +4,9 @@ import com.amary.codexgamer.core.data.datasource.local.entity.FavoriteEntity
 import com.amary.codexgamer.core.data.datasource.local.entity.GamesEntity
 import com.amary.codexgamer.core.data.datasource.local.entity.GamesWithFavorite
 import com.amary.codexgamer.core.data.datasource.remote.response.GamesResponse
-import com.amary.codexgamer.core.domain.model.Favorite
-import com.amary.codexgamer.core.domain.model.Games
-import com.amary.codexgamer.core.domain.model.GamesFavorite
+import com.amary.codexgamer.domain.model.Favorite
+import com.amary.codexgamer.domain.model.Games
+import com.amary.codexgamer.domain.model.GamesFavorite
 
 
 object DataMapper {
@@ -66,22 +66,20 @@ object DataMapper {
         return gamesEntity
     }
 
-    fun mapEntityToDomain(input: GamesEntity): Games {
-        return Games(
-            id = input.id,
-            name = input.name,
-            released = input.released,
-            backgroundImage = input.backgroundImage,
-            rating = input.rating,
-            clip = input.clip,
-            minimumRequirement = input.minimumRequirement,
-            recommendedRequirement = input.recommendedRequirement,
-            genres = input.genres,
-            platforms = input.platforms,
-            stores = input.stores,
-            shortScreenshots = input.shortScreenshots
-        )
-    }
+    fun mapEntityToDomain(input: GamesEntity) = Games(
+        id = input.id,
+        name = input.name,
+        released = input.released,
+        backgroundImage = input.backgroundImage,
+        rating = input.rating,
+        clip = input.clip,
+        minimumRequirement = input.minimumRequirement,
+        recommendedRequirement = input.recommendedRequirement,
+        genres = input.genres,
+        platforms = input.platforms,
+        stores = input.stores,
+        shortScreenshots = input.shortScreenshots
+    )
 
     fun mapFavoriteDomainToFavoriteEntity(favorite: Favorite) = FavoriteEntity(
         inputId = favorite.gamesId

@@ -4,14 +4,15 @@ import android.app.Application
 import com.amary.codexgamer.core.di.databaseModule
 import com.amary.codexgamer.core.di.networkModule
 import com.amary.codexgamer.core.di.repositoryModule
+import com.amary.codexgamer.di.preferenceModule
 import com.amary.codexgamer.di.useCaseModule
-import com.amary.codexgamer.di.viewModelModule
 import com.facebook.stetho.Stetho
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
+@Suppress("unused")
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -25,7 +26,7 @@ class App : Application() {
                     networkModule,
                     repositoryModule,
                     useCaseModule,
-                    viewModelModule
+                    preferenceModule
                 )
             )
         }

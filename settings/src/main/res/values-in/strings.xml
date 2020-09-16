@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Codex Gamer</string>
+    <string name="localization">id-ID</string>
+    <string name="menu_home">Beranda</string>
+    <string name="menu_favorite">Favorit</string>
+    <string name="menu_settings">Pengaturan</string>
+    <string name="image_description">Gambar</string>
+    <string name="txt_setting_language">Pengaturan Bahasa</string>
+    <string name="language_en">Inggris</string>
+    <string name="language_id">Indonesia</string>
+    <string name="dark_mode">Mode Gelap</string>
+    <string name="alert_language_change">Bahasa telah berubah, Silakan mulai ulang aplikasi anda</string>
+    <string name="restart_now">Muat Ulang Sekarang</string>
+    <string name="restart_later">Nanti</string>
+</resources>

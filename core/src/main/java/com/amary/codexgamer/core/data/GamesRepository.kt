@@ -9,11 +9,12 @@ import com.amary.codexgamer.core.data.datasource.local.LocalDataSource
 import com.amary.codexgamer.core.data.datasource.remote.RemoteDataSource
 import com.amary.codexgamer.core.data.pagination.GamePageDataSource
 import com.amary.codexgamer.core.data.pagination.GamePageDataSourceFactory
-import com.amary.codexgamer.core.domain.model.Favorite
-import com.amary.codexgamer.core.domain.model.Games
-import com.amary.codexgamer.core.domain.model.GamesFavorite
-import com.amary.codexgamer.core.domain.repository.IGamesRepository
 import com.amary.codexgamer.core.utils.DataMapper
+import com.amary.codexgamer.domain.model.Favorite
+import com.amary.codexgamer.domain.model.Games
+import com.amary.codexgamer.domain.model.GamesFavorite
+import com.amary.codexgamer.domain.model.ResourceState
+import com.amary.codexgamer.domain.repository.IGamesRepository
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers

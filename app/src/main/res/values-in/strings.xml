@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Codex Gamer</string>
+    <string name="menu_home">Beranda</string>
+    <string name="menu_favorite">Favorit</string>
+    <string name="menu_settings">Pengaturan</string>
+    <string name="image_description">Gambar</string>
+</resources>
