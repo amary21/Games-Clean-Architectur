@@ -7,9 +7,6 @@ import com.amary.codexgamer.domain.usecase.GamesUseCase
 
 class DetailViewModel(private val gamesUseCase: GamesUseCase) : ViewModel() {
 
-    fun getDetailGames(gamesInt: Int) =
-        LiveDataReactiveStreams.fromPublisher(gamesUseCase.getDetailGames(gamesInt))
-
     fun insertFavorite(favorite: Favorite) = gamesUseCase.insertFavorite(favorite)
 
     fun deleteFavorite(gamesId: Int) = gamesUseCase.deleteFavorite(gamesId)

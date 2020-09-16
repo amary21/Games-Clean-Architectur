@@ -13,9 +13,6 @@ import io.reactivex.Flowable
 @Dao
 interface GamesDao {
 
-    @Query("SELECT * FROM games WHERE gamesid=:gamesId")
-    fun getDetailGames(gamesId: Int): Flowable<GamesEntity>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGames(gamesEntity: List<GamesEntity>): Completable
 

@@ -1,7 +1,6 @@
 package com.amary.codexgamer.favorite
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import coil.Coil
 import coil.request.ImageRequest
+import com.amary.codexgamer.MainActivity.Companion.BUNDLE_KEY
 import com.amary.codexgamer.favorite.databinding.FavoriteFragmentBinding
 import com.amary.codexgamer.utils.GamesConstant
 import com.ian.recyclerviewhelper.helper.setUpVerticalGridAdapter
@@ -55,8 +55,9 @@ class FavoriteFragment : Fragment() {
                                 tv_item_title_favorite.text = it.games.name
                                 tv_item_rating_favorite.text = it.games.rating.toString()
                             },{
-                                val uri = Uri.parse("codexgamer://detail?gamesId=${this.games.id}")
-                                startActivity(Intent(Intent.ACTION_VIEW, uri))
+                                val intent = Intent(context, Class.forName("com.amary.codexgamer.detail.DetailActivity"))
+                                intent.putExtra(BUNDLE_KEY, this.games)
+                                startActivity(intent)
                             })
                     } else {
                         ltLoadingFavorite.visibility = View.GONE

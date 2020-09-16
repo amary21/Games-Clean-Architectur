@@ -39,12 +39,6 @@ class GamesRepository(
         ).buildObservable().toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    override fun getDetailGames(gamesId: Int) : Flowable<Games>{
-        return localDataSource.getDetailGames(gamesId).map {
-            DataMapper.mapEntityToDomain(it)
-        }
-    }
-
     override fun getResourceState(): Flowable<ResourceState> {
         val transform = Transformations.switchMap(
             gamePageDataSourceFactory.gameLivePageDataSource,

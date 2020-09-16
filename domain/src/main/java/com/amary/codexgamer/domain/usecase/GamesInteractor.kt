@@ -7,8 +7,6 @@ class GamesInteractor(private val gamesRepository: IGamesRepository) : GamesUseC
 
     override fun getAllGames(searchKey: String) = gamesRepository.getAllGames(searchKey)
 
-    override fun getDetailGames(gamesId: Int) = gamesRepository.getDetailGames(gamesId)
-
     override fun getResourceState() = gamesRepository.getResourceState()
 
     override fun insertFavorite(favorite: Favorite) = gamesRepository.insertFavorite(favorite)

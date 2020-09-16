@@ -17,4 +17,5 @@
     <string name="sys_minimum_requirements">Minimum Requirements</string>
     <string name="sys_recommended_requirements">Recommended Requirement</string>
     <string name="youtube">https://www.youtube.com/embed/%1$s</string>
+    <string name="detail_actvity">com.amary.codexgamer.detail.DetailActivity</string>
 </resources>
