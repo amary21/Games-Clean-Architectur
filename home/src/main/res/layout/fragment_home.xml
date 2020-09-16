@@ -32,7 +32,7 @@
             app:layout_constraintWidth_percent="0.3"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/loading" />
+            app:lottie_fileName="loading.json" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lt_loading_next"
@@ -46,7 +46,7 @@
             app:layout_constraintWidth_percent="0.3"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/loading" />
+            app:lottie_fileName="loading.json" />
 
         <include
             android:id="@+id/view_error"
