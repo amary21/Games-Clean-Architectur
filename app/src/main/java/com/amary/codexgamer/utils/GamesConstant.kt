@@ -5,6 +5,7 @@ import com.amary.codexgamer.domain.model.Games
 import com.amary.codexgamer.domain.model.GamesFavorite
 
 object GamesConstant {
+
     val adapterGamesCallback = object : DiffUtil.ItemCallback<Games>() {
         override fun areItemsTheSame(oldItem: Games, newItem: Games) = oldItem.id == newItem.id
         override fun areContentsTheSame(oldItem: Games, newItem: Games) = oldItem == newItem
