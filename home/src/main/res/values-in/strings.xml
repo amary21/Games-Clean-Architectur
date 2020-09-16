@@ -1,13 +1,9 @@
 <resources>
     <string name="app_name">Codex Gamer</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="localization">id-ID</string>
     <string name="action_search">Cari</string>
     <string name="menu_home">Beranda</string>
     <string name="menu_favorite">Favorit</string>
     <string name="menu_settings">Pengaturan</string>
-    <string name="menu_detail">Detail</string>
     <string name="image_description">Gambar</string>
     <string name="text_primary">Sample of title text</string>
     <string name="text_subtitle">Contoh teks judul</string>
@@ -20,14 +16,5 @@
     <string name="system_requirements">Persyaratan Sistem (PC)</string>
     <string name="sys_minimum_requirements">Persyaratan Minimum</string>
     <string name="sys_recommended_requirements">Persyaratan yang Direkomendasikan</string>
-    <string name="msg_error">Ups! Ada yang tidak beres</string>
-    <string name="msg_empty">Data kosong</string>
     <string name="youtube">https://www.youtube.com/embed/%1$s</string>
-    <string name="txt_setting_language">Pengaturan Bahasa</string>
-    <string name="language_en">Inggris</string>
-    <string name="language_id">Indonesia</string>
-    <string name="dark_mode">Mode Gelap</string>
-    <string name="alert_language_change">Bahasa telah berubah, Silakan mulai ulang aplikasi anda</string>
-    <string name="restart_now">Muat Ulang Sekarang</string>
-    <string name="restart_later">Nanti</string>
 </resources>

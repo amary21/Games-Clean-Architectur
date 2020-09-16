@@ -22,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val preference: Preference by inject()
 
+    companion object{
+        const val BUNDLE_KEY = "com.amary.codexgamer.bundlekey"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,6 +1,7 @@
 package com.amary.codexgamer.detail
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -20,7 +21,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
 class DetailActivity : AppCompatActivity() {
-
 
     private val detailViewModel: DetailViewModel by viewModel()
     private lateinit var binding: ActivityDetailBinding
@@ -71,6 +71,7 @@ class DetailActivity : AppCompatActivity() {
                         gamesData.recommendedRequirement,
                         Html.FROM_HTML_MODE_COMPACT
                     ) else Html.fromHtml(gamesData.recommendedRequirement)
+                wbTrailer.setBackgroundColor(Color.BLACK)
                 wbTrailer.settings.javaScriptEnabled = true
                 wbTrailer.webChromeClient = WebChromeClient()
                 wbTrailer.loadUrl(getString(R.string.youtube, gamesData.clip))
