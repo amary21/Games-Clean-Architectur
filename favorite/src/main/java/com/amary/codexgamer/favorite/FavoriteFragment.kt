@@ -55,7 +55,7 @@ class FavoriteFragment : Fragment() {
                                 tv_item_title_favorite.text = it.games.name
                                 tv_item_rating_favorite.text = it.games.rating.toString()
                             },{
-                                val intent = Intent(context, Class.forName("com.amary.codexgamer.detail.DetailActivity"))
+                                val intent = Intent(context, Class.forName(getString(R.string.detail_activity)))
                                 intent.putExtra(BUNDLE_KEY, this.games)
                                 startActivity(intent)
                             })

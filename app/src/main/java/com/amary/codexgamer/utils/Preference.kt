@@ -12,7 +12,7 @@ class Preference(context: Context) {
     private var editor: SharedPreferences.Editor = pref.edit()
 
     companion object{
-        private const val PREFS_NAME = "com.amary.codexgamer.ui.settings"
+        private const val PREFS_NAME = "settings"
         const val LANGUAGE = "language"
         const val DARK_MODE = "dark_mode"
     }

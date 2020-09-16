@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection", "SpellCheckingInspection")
+
 package com.amary.codexgamer
 
 import androidx.test.platform.app.InstrumentationRegistry

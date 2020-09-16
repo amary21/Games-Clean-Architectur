@@ -323,7 +323,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/info_minimum" />
 
                         <TextView
-                            android:id="@+id/info_recomended"
+                            android:id="@+id/info_recommended"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -346,7 +346,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/info_recomended" />
+                            app:layout_constraintTop_toBottomOf="@+id/info_recommended" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val preference: Preference by inject()
 
     companion object{
-        const val BUNDLE_KEY = "com.amary.codexgamer.bundlekey"
+        const val BUNDLE_KEY = "bundle_key"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

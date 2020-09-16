@@ -87,7 +87,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                             },
                             adapterGamesCallback,
                             {
-                                val intent = Intent(context, Class.forName(getString(R.string.detail_actvity)))
+                                val intent = Intent(context, Class.forName(getString(R.string.detail_activity)))
                                 intent.putExtra(BUNDLE_KEY, this)
                                 startActivity(intent)
                             })

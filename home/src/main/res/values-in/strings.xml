@@ -17,5 +17,5 @@
     <string name="sys_minimum_requirements">Persyaratan Minimum</string>
     <string name="sys_recommended_requirements">Persyaratan yang Direkomendasikan</string>
     <string name="youtube">https://www.youtube.com/embed/%1$s</string>
-    <string name="detail_actvity">com.amary.codexgamer.detail.DetailActivity</string>
+    <string name="detail_activity">com.amary.codexgamer.detail.DetailActivity</string>
 </resources>
