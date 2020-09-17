@@ -7,8 +7,8 @@ jobs:
   build:
     executor: android/android
     filters:
-      - branches:
-          only: master          
+      branches:
+        only: master          
     steps:
       - checkout
       - restore_cache:
