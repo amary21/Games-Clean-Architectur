@@ -19,25 +19,18 @@ class Preference(context: Context) {
         const val DARK_MODE = "dark_mode"
     }
 
-    @Suppress("DEPRECATION")
     @RequiresApi(Build.VERSION_CODES.M)
-    val spec = KeyGenParameterSpec.Builder(
+    private val spec = KeyGenParameterSpec.Builder(
         MASTER_KEY,
         KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
-    ).apply {
-        setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-        setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-        setKeySize(256)
-        setUserAuthenticationRequired(true)
-        setUserAuthenticationValidityDurationSeconds(15)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            setUnlockedDeviceRequired(true)
-            setIsStrongBoxBacked(true)
-        }
-    }.build()
+    )
+        .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
+        .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
+        .setKeySize(256)
+        .build()
 
     @RequiresApi(Build.VERSION_CODES.M)
-    val masterKey= MasterKey.Builder(context)
+    private val masterKey: MasterKey = MasterKey.Builder(context)
         .setKeyGenParameterSpec(spec)
         .build()
 
