@@ -41,6 +41,8 @@ buildscript {
 
     ext.security_crypto_version ="1.1.0-alpha02"
     ext.security_preferences_version ="0.1.7"
+    ext.sqlcipher_version = "4.4.0"
+    ext.sqlite_version = "2.1.0"
 
     repositories {
         google()
