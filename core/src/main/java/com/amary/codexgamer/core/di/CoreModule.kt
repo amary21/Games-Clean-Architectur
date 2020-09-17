@@ -12,6 +12,8 @@ import com.amary.codexgamer.core.data.datasource.remote.response.GamesResponse
 import com.amary.codexgamer.domain.repository.IGamesRepository
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -24,10 +26,14 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<GamesDatabase>().gamesDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("__android_database__".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             GamesDatabase::class.java, "Games.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 

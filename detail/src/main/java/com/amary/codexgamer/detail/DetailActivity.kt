@@ -25,13 +25,14 @@ import org.koin.core.context.loadKoinModules
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailBinding
     private val detailViewModel: DetailViewModel by viewModel()
+    private var _binding: ActivityDetailBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadKoinModules(detailModule)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
+        _binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
 
         val games = intent.getParcelableExtra<Games>(BUNDLE_KEY)
         if (games != null) {
@@ -70,7 +71,7 @@ class DetailActivity : AppCompatActivity() {
                     gamesData.minimumRequirement,
                     Html.FROM_HTML_MODE_COMPACT
                 ) else Html.fromHtml(gamesData.minimumRequirement)
-            tvRecomendedRequirement.text =
+            tvRecommendedRequirement.text =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) Html.fromHtml(
                     gamesData.recommendedRequirement,
                     Html.FROM_HTML_MODE_COMPACT
@@ -127,5 +128,10 @@ class DetailActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

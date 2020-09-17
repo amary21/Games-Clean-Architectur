@@ -335,7 +335,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/tv_minimum_requirement" />
 
                         <TextView
-                            android:id="@+id/tv_recomended_requirement"
+                            android:id="@+id/tv_recommended_requirement"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"

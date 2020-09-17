@@ -1,22 +1,52 @@
 package com.amary.codexgamer.utils
 
 import android.content.Context
-import android.content.SharedPreferences
+import android.os.Build
+import android.security.keystore.KeyGenParameterSpec
+import android.security.keystore.KeyProperties
+import androidx.annotation.RequiresApi
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import com.securepreferences.SecurePreferences
+
 
 class Preference(context: Context) {
 
-    private var pref: SharedPreferences = context.getSharedPreferences(
-        PREFS_NAME,
-        Context.MODE_PRIVATE
-    )
-    private var editor: SharedPreferences.Editor = pref.edit()
-
     companion object{
+        private const val MASTER_KEY ="_androidx_security_master_key_"
         private const val PREFS_NAME = "settings"
         const val LANGUAGE = "language"
         const val DARK_MODE = "dark_mode"
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    private val spec = KeyGenParameterSpec.Builder(
+        MASTER_KEY,
+        KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
+    )
+        .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
+        .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
+        .setKeySize(256)
+        .build()
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private val masterKey= MasterKey.Builder(context)
+        .setKeyGenParameterSpec(spec)
+        .build()
+
+    private var pref = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        EncryptedSharedPreferences.create(
+            context,
+            PREFS_NAME,
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    } else {
+        SecurePreferences(context, Preference::class.simpleName, PREFS_NAME)
+    }
+
+    private var editor= pref.edit()
 
     fun setDataLanguage(value: String) = editor.putString(LANGUAGE, value).commit()
     fun getDataLanguage() = pref.getString(LANGUAGE, "")
