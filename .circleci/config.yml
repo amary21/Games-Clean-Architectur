@@ -2,15 +2,14 @@ version: 2.1
  
 orbs:
   android: circleci/android@0.2.1
-
-workflows:
-  jobs:
-    build:
-      filters:
-        branches:
-          only:
-            - master
-    executor: android/android       
+ 
+jobs:
+  build:
+    filters:
+      branches:
+        only:
+          - master
+    executor: android/android          
     steps:
       - checkout
       - restore_cache:
