@@ -30,7 +30,7 @@ class Preference(context: Context) {
         .build()
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private val masterKey: MasterKey = MasterKey.Builder(context)
+    private val masterKey= MasterKey.Builder(context)
         .setKeyGenParameterSpec(spec)
         .build()
 
