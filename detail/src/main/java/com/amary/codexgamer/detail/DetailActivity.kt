@@ -25,8 +25,8 @@ import org.koin.core.context.loadKoinModules
 
 class DetailActivity : AppCompatActivity() {
 
-    private val detailViewModel: DetailViewModel by viewModel()
     private lateinit var binding: ActivityDetailBinding
+    private val detailViewModel: DetailViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
