@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     executor: android/android
-    filter:
+    filters:
       - branches:
           only: master          
     steps:
