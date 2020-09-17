@@ -2,13 +2,16 @@ version: 2.1
  
 orbs:
   android: circleci/android@0.2.1
+
+triggers:
+  schedule:
+    filters:
+      branches:
+        only:
+          - master
  
 jobs:
   build:
-    filters:
-      branches:
-        only: 
-          - master
     executor: android/android       
     steps:
       - checkout
