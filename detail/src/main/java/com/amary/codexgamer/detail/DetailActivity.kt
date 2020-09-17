@@ -70,7 +70,7 @@ class DetailActivity : AppCompatActivity() {
                     gamesData.minimumRequirement,
                     Html.FROM_HTML_MODE_COMPACT
                 ) else Html.fromHtml(gamesData.minimumRequirement)
-            tvRecomendedRequirement.text =
+            tvRecommendedRequirement.text =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) Html.fromHtml(
                     gamesData.recommendedRequirement,
                     Html.FROM_HTML_MODE_COMPACT
