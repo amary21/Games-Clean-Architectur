@@ -6,6 +6,9 @@ orbs:
 jobs:
   build:
     executor: android/android
+    filter:
+      - branches:
+          only: master          
     steps:
       - checkout
       - restore_cache:
