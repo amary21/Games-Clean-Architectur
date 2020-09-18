@@ -6,10 +6,12 @@ import androidx.paging.PagedList
 import com.amary.codexgamer.core.data.datasource.local.LocalDataSource
 import com.amary.codexgamer.core.data.datasource.local.entity.GamesEntity
 import com.amary.codexgamer.core.data.datasource.remote.RemoteDataSource
+import io.reactivex.disposables.CompositeDisposable
 
 class GamePageDataSourceFactory(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
+    private val compositeDisposable: CompositeDisposable,
     private val search: String
 ) : DataSource.Factory<Int, GamesEntity>() {
 
@@ -28,6 +30,7 @@ class GamePageDataSourceFactory(
         val gamePageDataSource = GamePageDataSource(
             remoteDataSource = remoteDataSource,
             localDataSource = localDataSource,
+            compositeDisposable = compositeDisposable,
             search = search
         )
         gameLivePageDataSource.postValue(gamePageDataSource)
