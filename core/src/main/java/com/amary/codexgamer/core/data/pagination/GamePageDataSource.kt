@@ -40,28 +40,32 @@ class GamePageDataSource(
     @SuppressLint("CheckResult")
     private fun fetchData(page: Int, callback: (List<GamesEntity>?) -> Unit) {
         resourceState.postValue(ResourceState.LOADING)
-        remoteDataSource.getAllGames(page, search)
-            .map { DataMapper.mapResponsesToEntities(it) }
-            .doOnSuccess {
-                if (it.isNotEmpty()) {
-                    resourceState.postValue(ResourceState.LOADED)
-                    localDataSource.insertGames(it)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe()
-                    callback(it)
-                } else {
-                    resourceState.postValue(ResourceState.ERROR)
+        try {
+            remoteDataSource.getAllGames(page, search)
+                .map { DataMapper.mapResponsesToEntities(it) }
+                .doOnSuccess {
+                    if (it.isNotEmpty()) {
+                        resourceState.postValue(ResourceState.LOADED)
+                        localDataSource.insertGames(it)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe()
+                        callback(it)
+                    } else {
+                        resourceState.postValue(ResourceState.ERROR)
+                    }
                 }
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .ignoreElement()
-            .subscribe({}, { error ->
-                callback(null)
-                getJobErrorHandler(error)
-                resourceState.postValue(ResourceState.ERROR)
-            })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .ignoreElement()
+                .subscribe({}, { error ->
+                    callback(null)
+                    getJobErrorHandler(error)
+                    resourceState.postValue(ResourceState.ERROR)
+                })
+        } catch (e: Exception) {
+            getJobErrorHandler(e)
+        }
     }
 
     private fun getJobErrorHandler(error: Throwable) {
