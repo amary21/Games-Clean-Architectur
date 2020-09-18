@@ -48,6 +48,7 @@ val networkModule = module {
             .create()
     }
     single {
+
         val certificate = CertificatePinner.Builder()
             .add("api.rawg.io",  "sha256/R+V29DqDnO269dFhAAB5jMlZHepWpDGuoejXJjprh7A=")
             .add("api.rawg.io", "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
