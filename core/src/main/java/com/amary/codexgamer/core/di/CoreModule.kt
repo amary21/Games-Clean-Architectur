@@ -50,10 +50,13 @@ val networkModule = module {
     single {
 
         val hostName = HOST_NAME
+        val pins1 = CERTIFICATE_1
+        val pins2 = CERTIFICATE_2
+        val pins3 = CERTIFICATE_3
         val certificate = CertificatePinner.Builder()
-            .add(hostName, "sha256/R+V29DqDnO269dFhAAB5jMlZHepWpDGuoejXJjprh7A=")
-            .add(hostName, "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
-            .add(hostName, "sha256/Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=")
+            .add(hostName, pins1)
+            .add(hostName, pins2)
+            .add(hostName, pins3)
             .build()
 
         OkHttpClient.Builder()
