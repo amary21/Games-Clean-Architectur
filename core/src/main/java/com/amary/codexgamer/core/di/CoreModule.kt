@@ -49,9 +49,9 @@ val networkModule = module {
     }
     single {
         val certificate = CertificatePinner.Builder()
-            .add(HOST_NAME,  CERTIFICATE_1)
-            .add(HOST_NAME, CERTIFICATE_2)
-            .add(HOST_NAME, CERTIFICATE_3)
+            .add("api.rawg.io",  "sha256/R+V29DqDnO269dFhAAB5jMlZHepWpDGuoejXJjprh7A=")
+            .add("api.rawg.io", "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
+            .add("api.rawg.io", "sha256/Y9mvm0exBk1JoQ57f9Vm28jKo5lFm/woKcVxrYxu80o=")
             .build()
 
         OkHttpClient.Builder()
