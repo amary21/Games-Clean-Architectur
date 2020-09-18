@@ -6,7 +6,6 @@ import androidx.paging.PagedList
 import com.amary.codexgamer.core.data.datasource.local.LocalDataSource
 import com.amary.codexgamer.core.data.datasource.local.entity.GamesEntity
 import com.amary.codexgamer.core.data.datasource.remote.RemoteDataSource
-import io.reactivex.disposables.CompositeDisposable
 
 class GamePageDataSourceFactory(
     private val remoteDataSource: RemoteDataSource,
