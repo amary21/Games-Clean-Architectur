@@ -1,6 +1,5 @@
 package com.amary.codexgamer.core.data.pagination
 
-import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
@@ -10,11 +9,13 @@ import com.amary.codexgamer.core.data.datasource.remote.RemoteDataSource
 import com.amary.codexgamer.core.utils.DataMapper
 import com.amary.codexgamer.domain.model.ResourceState
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class GamePageDataSource(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
+    private val compositeDisposable: CompositeDisposable,
     private val search: String
 ) : PageKeyedDataSource<Int, GamesEntity?>() {
 
@@ -37,11 +38,10 @@ class GamePageDataSource(
         }
     }
 
-    @SuppressLint("CheckResult")
     private fun fetchData(page: Int, callback: (List<GamesEntity>?) -> Unit) {
         resourceState.postValue(ResourceState.LOADING)
         try {
-            remoteDataSource.getAllGames(page, search)
+            val dispose = remoteDataSource.getAllGames(page, search)
                 .map { DataMapper.mapResponsesToEntities(it) }
                 .doOnSuccess {
                     if (it.isNotEmpty()) {
@@ -63,6 +63,8 @@ class GamePageDataSource(
                     getJobErrorHandler(error)
                     resourceState.postValue(ResourceState.ERROR)
                 })
+            compositeDisposable.add(dispose)
+            compositeDisposable.dispose()
         } catch (e: Exception) {
             getJobErrorHandler(e)
         }
