@@ -1,7 +1,7 @@
 package com.amary.codexgamer.core.di
 
 import androidx.room.Room
-import com.amary.codexgamer.core.BuildConfig.BASE_URL
+import com.amary.codexgamer.core.BuildConfig.*
 import com.amary.codexgamer.core.data.GamesRepository
 import com.amary.codexgamer.core.data.datasource.local.LocalDataSource
 import com.amary.codexgamer.core.data.datasource.local.room.GamesDatabase
@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -47,10 +48,17 @@ val networkModule = module {
             .create()
     }
     single {
+        val certificate = CertificatePinner.Builder()
+            .add(HOST_NAME,  CERTIFICATE_1)
+            .add(HOST_NAME, CERTIFICATE_2)
+            .add(HOST_NAME, CERTIFICATE_3)
+            .build()
+
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificate)
             .build()
     }
     single {
