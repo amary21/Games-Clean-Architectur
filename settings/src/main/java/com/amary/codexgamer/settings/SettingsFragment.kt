@@ -38,7 +38,7 @@ class SettingsFragment : Fragment(), CompoundButton.OnCheckedChangeListener,
 
     private fun getSettingDarkMode() {
         val darkPreference = preference.getDataDarkMode()
-        sw_dark_mode.isChecked = darkPreference == 2
+        sw_dark_mode.isChecked = darkPreference == AppCompatDelegate.MODE_NIGHT_YES
     }
 
     private fun getSettingLanguage() {
