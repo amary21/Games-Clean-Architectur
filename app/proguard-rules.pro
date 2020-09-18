@@ -22,3 +22,4 @@
 #noinspection ShrinkerUnresolvedReference
 -keep class androidx.databinding.** { *; }
 -keep class * extends androidx.databinding.DataBinderMapper { *; }
+-dontwarn java.lang.instrument.ClassFileTransformer
