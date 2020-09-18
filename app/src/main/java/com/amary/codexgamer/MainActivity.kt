@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun getDarkModeOn() {
         val darkPreference = preference.getDataDarkMode()
-        val dark = darkPreference ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        val darkIsNull = if (darkPreference == 0) null else darkPreference
+        val dark = darkIsNull ?: AppCompatDelegate.MODE_NIGHT_NO
         AppCompatDelegate.setDefaultNightMode(dark)
     }
 }

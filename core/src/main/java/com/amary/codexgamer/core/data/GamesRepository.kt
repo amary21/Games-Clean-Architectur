@@ -1,5 +1,6 @@
 package com.amary.codexgamer.core.data
 
+import android.annotation.SuppressLint
 import android.arch.convert.toFlowable
 import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
@@ -17,7 +18,6 @@ import com.amary.codexgamer.domain.repository.IGamesRepository
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
@@ -27,11 +27,10 @@ class GamesRepository(
 ) : IGamesRepository {
 
     private lateinit var gamePageDataSourceFactory: GamePageDataSourceFactory
-    private val compositeDisposable = CompositeDisposable()
 
     override fun getAllGames(searchKey: String): Flowable<PagedList<Games>> {
         gamePageDataSourceFactory =
-            GamePageDataSourceFactory(remoteDataSource, localDataSource, compositeDisposable, searchKey)
+            GamePageDataSourceFactory(remoteDataSource, localDataSource, searchKey)
         val dataSource = gamePageDataSourceFactory.map { DataMapper.mapEntityToDomain(it) }
         return RxPagedListBuilder(
             dataSource,
@@ -61,16 +60,15 @@ class GamesRepository(
             .subscribe()
     }
 
+    @SuppressLint("CheckResult")
     override fun isFavorite(gamesId: Int): Flowable<Int> {
         val result = PublishSubject.create<Int>()
-        val dispose = localDataSource.isFavorite(gamesId)
+        localDataSource.isFavorite(gamesId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 result.onNext(it)
             }
-        compositeDisposable.add(dispose)
-        compositeDisposable.dispose()
 
         return result.toFlowable(BackpressureStrategy.BUFFER)
     }
