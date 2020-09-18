@@ -38,4 +38,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$canary_version"
+
+    implementation "androidx.security:security-crypto:$security_crypto_version"
+    implementation "com.scottyab:secure-preferences-lib:0.1.7"
 }

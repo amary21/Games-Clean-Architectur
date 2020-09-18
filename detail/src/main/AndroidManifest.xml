@@ -16,6 +16,12 @@
     <application>
         <activity android:name=".DetailActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="codexgamer"
+                    android:host="detail"/>
+            </intent-filter>
         </activity>
     </application>
 

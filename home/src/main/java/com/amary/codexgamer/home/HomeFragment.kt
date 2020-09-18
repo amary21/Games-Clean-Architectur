@@ -25,7 +25,7 @@ import org.koin.core.context.loadKoinModules
 class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val homeViewModel: HomeViewModel by viewModel()
-    private lateinit var binding: FragmentHomeBinding
+    private var binding: FragmentHomeBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +35,8 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         loadKoinModules(homeModule)
         setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        initListGames(binding)
-        return binding.root
+        binding?.let { initListGames(it) }
+        return binding?.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -55,7 +55,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String): Boolean {
         if (query.isNotEmpty()) {
-            initListGames(binding, query)
+            binding?.let { initListGames(it, query) }
         }
 
         return true
@@ -115,5 +115,10 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
             })
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

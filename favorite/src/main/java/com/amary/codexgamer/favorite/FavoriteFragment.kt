@@ -20,7 +20,7 @@ import org.koin.core.context.loadKoinModules
 class FavoriteFragment : Fragment() {
 
     private val favoriteViewModel: FavoriteViewModel by inject()
-    private lateinit var binding: FavoriteFragmentBinding
+    private var binding: FavoriteFragmentBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,8 +28,8 @@ class FavoriteFragment : Fragment() {
     ): View? {
         loadKoinModules(favoriteModule)
         binding = DataBindingUtil.inflate(inflater, R.layout.favorite_fragment, container, false)
-        initFavoriteGames(binding)
-        return binding.root
+        binding?.let { initFavoriteGames(it) }
+        return binding?.root
     }
 
     private fun initFavoriteGames(binding: FavoriteFragmentBinding) {
@@ -66,6 +66,11 @@ class FavoriteFragment : Fragment() {
 
                 })
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 }

@@ -17,11 +17,19 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
         buildConfigField 'String', 'BASE_URL', base_url
+        buildConfigField 'String', 'HOST_NAME', host_name
+        buildConfigField 'String', 'CERTIFICATE_1', certificate_1
+        buildConfigField 'String', 'CERTIFICATE_2', certificate_2
+        buildConfigField 'String', 'CERTIFICATE_3', certificate_3
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -58,5 +66,8 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room_version"
 
     implementation "com.github.YvesCheung:LiveDataToRxJava:$livedatatorx_version"
+    implementation "net.zetetic:android-database-sqlcipher:$sqlcipher_version"
+    implementation "androidx.sqlite:sqlite:$sqlite_version"
 
+    implementation 'org.conscrypt:conscrypt-android:2.2.1'
 }

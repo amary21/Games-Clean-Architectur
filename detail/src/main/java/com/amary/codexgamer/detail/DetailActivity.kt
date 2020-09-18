@@ -25,8 +25,8 @@ import org.koin.core.context.loadKoinModules
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailBinding
     private val detailViewModel: DetailViewModel by viewModel()
+    private var binding: ActivityDetailBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class DetailActivity : AppCompatActivity() {
 
         val games = intent.getParcelableExtra<Games>(BUNDLE_KEY)
         if (games != null) {
-            initDetailGames(games, binding)
+            binding?.let { initDetailGames(games, it) }
         }
     }
 
@@ -127,5 +127,10 @@ class DetailActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }
