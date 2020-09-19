@@ -37,8 +37,9 @@ class FavoriteFragment : Fragment() {
             ltLoadingFavorite.visibility = View.VISIBLE
             favoriteViewModel.getAllFavoriteGames()
                 .observe(viewLifecycleOwner, { listFavorite ->
-                    if (listFavorite.isNotEmpty()){
+                    if (listFavorite.isNotEmpty()) {
                         ltLoadingFavorite.visibility = View.GONE
+                        rvFavorite.visibility = View.VISIBLE
                         rvFavorite.setUpVerticalGridAdapter(
                             listFavorite,
                             GamesConstant.adapterFavoriteGamesCallback,
@@ -54,12 +55,16 @@ class FavoriteFragment : Fragment() {
                                 imageLoader.enqueue(request)
                                 tv_item_title_favorite.text = it.games.name
                                 tv_item_rating_favorite.text = it.games.rating.toString()
-                            },{
-                                val intent = Intent(context, Class.forName(getString(R.string.detail_activity)))
+                            }, {
+                                val intent = Intent(
+                                    context,
+                                    Class.forName(getString(R.string.detail_activity))
+                                )
                                 intent.putExtra(BUNDLE_KEY, this.games)
                                 startActivity(intent)
                             })
                     } else {
+                        rvFavorite.visibility = View.GONE
                         ltLoadingFavorite.visibility = View.GONE
                         viewErrorFavorite.visibility = View.VISIBLE
                     }
