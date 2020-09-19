@@ -82,24 +82,22 @@ class DetailActivity : AppCompatActivity() {
             wbTrailer.webChromeClient = WebChromeClient()
             wbTrailer.loadUrl(getString(R.string.youtube, gamesData.clip))
 
-            lifecycleOwner?.let {
-                detailViewModel.isFavorite(gamesData.id).observe(it, { favoriteState ->
-                    var isFavorite = favoriteState == 1
-                    setStatusFavorite(isFavorite, fabFavorite)
-                    fabFavorite.setOnClickListener {
-                        if (isFavorite) {
-                            detailViewModel.deleteFavorite(gamesData.id)
-                        } else {
-                            detailViewModel.insertFavorite(
-                                Favorite(gamesData.id)
-                            )
-                        }
-
-                        isFavorite = !isFavorite
-                        setStatusFavorite(isFavorite, fab_favorite)
+            detailViewModel.isFavorite(gamesData.id).observe(this@DetailActivity, {
+                var isFavorite = it == 1
+                setStatusFavorite(isFavorite, fabFavorite)
+                fabFavorite.setOnClickListener {
+                    if (isFavorite) {
+                        detailViewModel.deleteFavorite(gamesData.id)
+                    } else {
+                        detailViewModel.insertFavorite(
+                            Favorite(gamesData.id)
+                        )
                     }
-                })
-            }
+
+                    isFavorite = !isFavorite
+                    setStatusFavorite(isFavorite, fab_favorite)
+                }
+            })
         }
     }
 
