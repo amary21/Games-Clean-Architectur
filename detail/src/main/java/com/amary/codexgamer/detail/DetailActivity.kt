@@ -14,6 +14,7 @@ import coil.Coil
 import coil.request.ImageRequest
 import com.amary.codexgamer.MainActivity.Companion.BUNDLE_KEY
 import com.amary.codexgamer.detail.databinding.ActivityDetailBinding
+import com.amary.codexgamer.domain.model.Favorite
 import com.amary.codexgamer.domain.model.Games
 import com.amary.codexgamer.utils.GamesConstant
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -81,24 +82,24 @@ class DetailActivity : AppCompatActivity() {
             wbTrailer.webChromeClient = WebChromeClient()
             wbTrailer.loadUrl(getString(R.string.youtube, gamesData.clip))
 
-            detailViewModel.isFavorite(gamesData.id).observe(this@DetailActivity, {
-                var isFavorite = it == 1
-                setStatusFavorite(isFavorite, fabFavorite)
-                fabFavorite.setOnClickListener {
-                    if (isFavorite) {
-                        detailViewModel.deleteFavorite(gamesData.id)
-                    } else {
-                        detailViewModel.insertFavorite(
-                            com.amary.codexgamer.domain.model.Favorite(
-                                gamesData.id
+            lifecycleOwner?.let {
+                detailViewModel.isFavorite(gamesData.id).observe(it, { favoriteState ->
+                    var isFavorite = favoriteState == 1
+                    setStatusFavorite(isFavorite, fabFavorite)
+                    fabFavorite.setOnClickListener {
+                        if (isFavorite) {
+                            detailViewModel.deleteFavorite(gamesData.id)
+                        } else {
+                            detailViewModel.insertFavorite(
+                                Favorite(gamesData.id)
                             )
-                        )
-                    }
+                        }
 
-                    isFavorite = !isFavorite
-                    setStatusFavorite(isFavorite, fab_favorite)
-                }
-            })
+                        isFavorite = !isFavorite
+                        setStatusFavorite(isFavorite, fab_favorite)
+                    }
+                })
+            }
         }
     }
 
