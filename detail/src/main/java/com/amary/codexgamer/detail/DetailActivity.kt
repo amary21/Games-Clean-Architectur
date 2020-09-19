@@ -61,10 +61,11 @@ class DetailActivity : AppCompatActivity() {
                     imageLoader.enqueue(request)
                 })
 
-            detailGames = gamesData
-            genreGames = gamesData.genres.joinToString(separator = ", ")
-            platformGames = gamesData.platforms.joinToString(separator = ", ")
-            storeGames = gamesData.stores.joinToString(separator = ", ")
+            tvReleaseDate.text = gamesData.released
+            tvRating.text = gamesData.rating.toString()
+            tvGenre.text = gamesData.genres.joinToString(separator = ", ")
+            tvPlatform.text = gamesData.platforms.joinToString(separator = ", ")
+            tvStore.text = gamesData.stores.joinToString(separator = ", ")
             tvMinimumRequirement.text =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) Html.fromHtml(
                     gamesData.minimumRequirement,

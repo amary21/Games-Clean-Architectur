@@ -3,28 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="java.util.ArrayList" />
-
-        <variable
-            name="detailGames"
-            type="com.amary.codexgamer.domain.model.Games" />
-
-        <variable
-            name="genreGames"
-            type="String" />
-
-        <variable
-            name="platformGames"
-            type="String" />
-
-        <variable
-            name="storeGames"
-            type="String" />
-
-    </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -136,7 +114,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@{genreGames}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
@@ -162,7 +139,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@{detailGames.released}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
@@ -188,7 +164,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@{String.valueOf(detailGames.rating)}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
@@ -214,7 +189,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@{platformGames}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
@@ -240,7 +214,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@{storeGames}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp"
